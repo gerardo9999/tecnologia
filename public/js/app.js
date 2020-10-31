@@ -6427,6 +6427,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import VueBarcode from 'vue-barcode';
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6637,6 +6659,66 @@ __webpack_require__.r(__webpack_exports__);
       this.hora = '';
       this.observacion = '';
       this.errorResrva = 0;
+    },
+    reservacancelada: function reservacancelada(id) {
+      var _this2 = this;
+
+      swal({
+        title: 'Desea cancelar esta reserva?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this2;
+          axios.post('reserva/cancelada', {
+            'id': id
+          }).then(function (response) {
+            me.listarReserva(1, '', 'fecha');
+            swal('Cancelada!', 'La reserva se va ha cancelar.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {}
+      });
+    },
+    reservapendiente: function reservapendiente(id) {
+      var _this3 = this;
+
+      swal({
+        title: 'Desea realizar su reserva?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this3;
+          axios.post('reserva/pendiente', {
+            'id': id
+          }).then(function (response) {
+            me.listarReserva(1, '', 'fecha');
+            swal('Reserva Pendiente!', 'La Reserva se ha registrado.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {}
+      });
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -8631,6 +8713,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import VueBarcode from 'vue-barcode';
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -8821,6 +8926,66 @@ __webpack_require__.r(__webpack_exports__);
       this.hora = '';
       this.observacion = '';
       this.errorResrva = 0;
+    },
+    reservacancelada: function reservacancelada(id) {
+      var _this2 = this;
+
+      swal({
+        title: 'Desea cancelar esta reserva?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this2;
+          axios.post('reserva/cancelada', {
+            'id': id
+          }).then(function (response) {
+            me.listarReserva(1, '', 'fecha');
+            swal('Cancelada!', 'La reserva se va ha cancelar.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {}
+      });
+    },
+    reservapendiente: function reservapendiente(id) {
+      var _this3 = this;
+
+      swal({
+        title: 'Desea realizar su reserva?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this3;
+          axios.post('reserva/pendiente', {
+            'id': id
+          }).then(function (response) {
+            me.listarReserva(1, '', 'fecha');
+            swal('Reserva Pendiente!', 'La Reserva se ha registrado.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {}
+      });
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -53791,38 +53956,90 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal(
-                                "reserva",
-                                "actualizar",
-                                reserva
-                              )
+                      reserva.estado == 1
+                        ? _c("div", [
+                            _c("span", { staticClass: "badge badge-danger" }, [
+                              _vm._v("Pendiente")
+                            ])
+                          ])
+                        : _c("div", [
+                            _c("span", { staticClass: "badge badge-success" }, [
+                              _vm._v("Cancelado")
+                            ])
+                          ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal(
+                                  "reserva",
+                                  "actualizar",
+                                  reserva
+                                )
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-pencil" })]
-                      ),
-                      _vm._v("  \n\n                                 "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.eliminarReserva(reserva.id)
+                          },
+                          [_c("i", { staticClass: "icon-pencil" })]
+                        ),
+                        _vm._v("  \n\n                                "),
+                        reserva.estado
+                          ? [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-warning btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.reservacancelada(reserva.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-unlock" })]
+                              ),
+                              _vm._v("  \n                               ")
+                            ]
+                          : [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.reservapendiente(reserva.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-lock" })]
+                              ),
+                              _vm._v("  \n                             ")
+                            ],
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.eliminarReserva(reserva.id)
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-trash" })]
-                      )
-                    ])
+                          },
+                          [_c("i", { staticClass: "icon-trash" })]
+                        )
+                      ],
+                      2
+                    )
                   ])
                 }),
                 0
@@ -57347,38 +57564,90 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal(
-                                "reserva",
-                                "actualizar",
-                                reserva
-                              )
+                      reserva.estado == 1
+                        ? _c("div", [
+                            _c("span", { staticClass: "badge badge-danger" }, [
+                              _vm._v("Pendiente")
+                            ])
+                          ])
+                        : _c("div", [
+                            _c("span", { staticClass: "badge badge-success" }, [
+                              _vm._v("Cancelado")
+                            ])
+                          ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal(
+                                  "reserva",
+                                  "actualizar",
+                                  reserva
+                                )
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-pencil" })]
-                      ),
-                      _vm._v("  \n\n                                 "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.eliminarReserva(reserva.id)
+                          },
+                          [_c("i", { staticClass: "icon-pencil" })]
+                        ),
+                        _vm._v("  \n\n                                "),
+                        reserva.estado
+                          ? [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-warning btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.reservacancelada(reserva.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-unlock" })]
+                              ),
+                              _vm._v("  \n                               ")
+                            ]
+                          : [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.reservapendiente(reserva.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-lock" })]
+                              ),
+                              _vm._v("  \n                             ")
+                            ],
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.eliminarReserva(reserva.id)
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-trash" })]
-                      )
-                    ])
+                          },
+                          [_c("i", { staticClass: "icon-trash" })]
+                        )
+                      ],
+                      2
+                    )
                   ])
                 }),
                 0
@@ -75366,7 +75635,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\gerar\OneDrive\Escritorio\Proyecto\Tecnologia\Tecnologia\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Restaurante\tecnologia\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

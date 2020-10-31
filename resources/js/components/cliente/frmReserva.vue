@@ -42,10 +42,33 @@
                                     <td v-text="reserva.fecha"></td>
                                     <td v-text="reserva.hora"></td>
                                     <td v-text="reserva.observacion"></td>
+
+                                     <td>
+                                       <div v-if="reserva.estado==1">
+                                         <span class="badge badge-danger">Pendiente</span>
+                                       </div>
+                                       <div v-else>
+                                          <span class="badge badge-success">Cancelado</span>
+                                       </div>
+                                     </td>
+
                                     <td>
                                         <button type="button" @click="abrirModal('reserva','actualizar',reserva)" class="btn btn-success btn-sm">
                                             <i class="icon-pencil"></i>
                                         </button> &nbsp;
+
+                                        <template v-if="reserva.estado">
+                                                    <button type="button" @click="reservacancelada(reserva.id)" class="btn btn-warning btn-sm">
+                                                        <i class="fa fa-unlock"></i>
+                                                     </button> &nbsp;
+                                       </template>
+                                                                            
+                                      <template v-else>
+                                                  <button type="button" @click="reservapendiente(reserva.id)" class="btn btn-danger btn-sm">
+                                                    <i class="icon-lock"></i>
+                                                  </button> &nbsp;
+                                     </template>
+
 
                                          <button type="button" class="btn btn-danger btn-sm" @click="eliminarReserva(reserva.id)">
                                             <i class="icon-trash"></i>
@@ -340,6 +363,89 @@
                 this.observacion = '';
 		        this.errorResrva=0;
             },
+            reservacancelada(id){
+                swal({
+                title: 'Desea cancelar esta reserva?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.post('reserva/cancelada',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarReserva(1, '', 'fecha');
+                        swal(
+                        'Cancelada!',
+                        'La reserva se va ha cancelar.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
+            },
+            
+
+                reservapendiente(id){
+                swal({
+                title: 'Desea realizar su reserva?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.post('reserva/pendiente',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarReserva(1, '', 'fecha');
+                        swal(
+                        'Reserva Pendiente!',
+                        'La Reserva se ha registrado.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
+            },
+
+
+
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
                     case "reserva":

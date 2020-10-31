@@ -164,7 +164,9 @@ Route::post('reserva/cliente/modificar','ctrlReserva@modificarReservaCliente');
 
 Route::get('pedido'           ,'ctrlPedido@mostrar');
 
-
+//------------------reserva admin----------------//
+Route::post('reserva/cancelada','ctrlReserva@reservacancelada');
+Route::post('reserva/pendiente','ctrlReserva@reservapendiente');
 
 
 //   Usuario

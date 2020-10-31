@@ -19,10 +19,12 @@ class CreateCategoriaTable extends Migration
             $table->string('nombre');
         });
         
-        DB::table('categoria')->insert(array('nombre'=>'guisos'));
-        DB::table('categoria')->insert(array('nombre'=>'ensaladas'));
-        DB::table('categoria')->insert(array('nombre'=>'carne roja'));
-        DB::table('categoria')->insert(array('nombre'=>'carne blanca'));
+        DB::table('categoria')->insert(array('nombre'=>'Pollos'));
+        DB::table('categoria')->insert(array('nombre'=>'Carnes'));
+        DB::table('categoria')->insert(array('nombre'=>'Platos Especiales'));
+        DB::table('categoria')->insert(array('nombre'=>'Bebidas'));
+        DB::table('categoria')->insert(array('nombre'=>'Postres'));
+        DB::table('categoria')->insert(array('nombre'=>'Milanesa'));
     }
 
     /**

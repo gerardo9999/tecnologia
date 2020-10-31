@@ -27,6 +27,7 @@ class ctrlReserva extends Controller
                 "reserva.fecha",
                 "reserva.hora",
                 "reserva.observacion",
+                "reserva.estado",
                 "reserva.idCliente",
                 "cliente.nombres",
                 "cliente.apellidos",
@@ -42,6 +43,7 @@ class ctrlReserva extends Controller
                 "reserva.fecha",
                 "reserva.hora",
                 "reserva.observacion",
+                "reserva.estado",
                 "idCliente",
                 "cliente.nombres",
                 "cliente.apellidos",
@@ -82,6 +84,7 @@ class ctrlReserva extends Controller
         $reserva->fecha = $request->fecha;
         $reserva->hora = $request->hora;
         $reserva->observacion = $request->observacion;
+        $reserva->estado = $request->estado;
         $reserva->idCliente = $request->idCliente;
         $reserva->save();
 
@@ -138,6 +141,7 @@ class ctrlReserva extends Controller
                 "reserva.fecha",
                 "reserva.hora",
                 "reserva.observacion",
+                "reserva.estado",
                 "reserva.idCliente"
             )
             ->orderBy('reserva.id','desc')
@@ -151,6 +155,7 @@ class ctrlReserva extends Controller
                 "reserva.fecha",
                 "reserva.hora",
                 "reserva.observacion",
+                "reserva.estado",
                 "idCliente"
             )
             ->orderBy('reserva.id','desc')
@@ -202,9 +207,20 @@ class ctrlReserva extends Controller
         $reserva->fecha         = $request->fecha;
         $reserva->hora          = $request->hora;
         $reserva->observacion   = $request->observacion;
+        $reserva->estado        = $request->estado;
         $reserva->idCliente     = $idCliente;
         $reserva->save();
 
         $bitacora = bitacora::guardar('reserva','guardar',$reserva->id);
+    }
+    public function reservacancelada(Request $request){
+        $reserva= reserva::findOrFail($request->id);
+        $reserva->estado = 0;
+        $reserva->update();
+    }
+    public function reservapendiente(Request $request){
+        $reserva= reserva::findOrFail($request->id);
+        $reserva->estado = 1;
+        $reserva->update();
     }
 }

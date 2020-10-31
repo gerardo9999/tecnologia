@@ -11,7 +11,9 @@ class pedido extends Model
     protected $fillable = [
         'fecha',
         'fechaentrega',
+        'hora',
         'horaentrega',
+        'tiempoEntrega',
         'glosa',
         'montototal',
         'estado'

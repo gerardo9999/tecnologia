@@ -14,6 +14,7 @@ class reserva extends Model
         'fecha',
         'hora',
         'observacion',
+        'estado',
         'idCliente'
     ];
 
