@@ -18,6 +18,8 @@ class ctrlPedido extends Controller
     public function guardar(Request $request){
         $hora1= date('H:i:s'); 
         
+        
+
         if (empty($request->hora_entrega)) {
             $hora = $this->sumarHoras($hora1,$request->tiempo);
             // return [
@@ -44,7 +46,9 @@ class ctrlPedido extends Controller
             $pedido = new pedido();
             $pedido->fecha = date('Y-m-d');
             $pedido->fechaentrega = $request->fecha_entrega;
+            $pedido->hora = $hora1;
             $pedido->horaentrega = $hora;
+            $pedido->tiempoentrega = $request->tiempo;
             $pedido->montototal = $request->montoTotal;
             $pedido->estado = 0;    //pendiente
             $pedido->idUsuario = null;
@@ -192,13 +196,15 @@ class ctrlPedido extends Controller
              'cliente.telefono',
              'cliente.direccion',
              'cliente.email',
-             'cliente.estado',
              'pedido.glosa',
              'ubicacion.referencia',
              'pedido.montototal',
              'pedido.fecha',
+             'pedido.estado',
              'pedido.fechaEntrega',
+             'pedido.hora',
              'pedido.horaEntrega',
+             'pedido.tiempoEntrega',
              'pedido.montoTotal'
              
              )
@@ -220,14 +226,16 @@ class ctrlPedido extends Controller
             'cliente.password',
             'cliente.empresa',
             'cliente.telefono',
+            'pedido.estado',
             'cliente.direccion',
             'cliente.email',
-            'cliente.estado',
             'pedido.glosa',
             'pedido.montototal',
             'pedido.fecha',
             'pedido.fechaEntrega',
+            'pedido.hora',
             'pedido.horaEntrega',
+            'pedido.tiempoEntrega',
             'pedido.montoTotal'
             )
 
@@ -259,8 +267,11 @@ class ctrlPedido extends Controller
           ->select('pedido.id',
                  'pedido.idUbicacion',
                  'pedido.idCliente',
+                 'pedido.fecha',
                  'pedido.fechaEntrega',
+                 'pedido.hora',
                  'pedido.horaEntrega',
+                 'pedido.tiempoEntrega',
                  'pedido.montoTotal',
                  'ubicacion.referencia',
                  'cliente.nombres as cliente',
@@ -306,7 +317,9 @@ public function mostrarPedidoRepartidor(Request $request){
              'cliente.estado',
              'pedido.fecha',
              'pedido.fechaEntrega',
+             'pedido.hora',
              'pedido.horaEntrega',
+             'pedido.tiempoEntrega',
              'ubicacion.referencia',
              'pedido.montoTotal',
              'pedido.estado'
@@ -334,7 +347,9 @@ public function mostrarPedidoRepartidor(Request $request){
             'cliente.estado',
             'pedido.fecha',
             'pedido.fechaEntrega',
+            'pedido.hora',
             'pedido.horaEntrega',
+            'pedido.tiempoEntrega',
             'ubicacion.referencia',
             'pedido.montoTotal',
             'pedido.estado'
@@ -359,77 +374,30 @@ public function mostrarPedidoRepartidor(Request $request){
             ];
     }
 
+    public function estadoPediente(Request $request){
+        $pedido= pedido::findOrFail($request->id);
+        $pedido->estado = 0;
+        $pedido->update();
 
+    }
 
-
-    public function entregado(Request $request){
+    public function estadoEntregado(Request $request){
         $pedido= pedido::findOrFail($request->id);
         $pedido->estado = 1;
         $pedido->update();
-
-        return ["pedido"=>$pedido];
-
     }
+
+
+    public function estadoCancelado(Request $request){
+        $pedido= pedido::findOrFail($request->id);
+        $pedido->estado = 2;
+        $pedido->update();
+    }
+    
 
 
 }
 
 
 
-        // if (!$request->ajax()) return redirect('/');
-
-        // $idRepartidor = Auth::id();     
-        // if($buscar==""){
-//             // $pedido = pedido::join('repartidor','pedido.idRepartidor','=','repartidor.id')
-//             ->join('cliente','cliente.id','=','pedido.idCliente')
-//             ->join('ubicacion','ubicacion.id','=','pedido.ubicacion')
-//             ->select('cliente.id as idCliente',
-//             'cliente.nombres',
-//             'cliente.apellidos',
-//             DB::raw('CONCAT(nombres," ",apellidos) as cliente'),
-//                 "pedido.fecha",
-//                 "pedido.fechaEntrega",
-//                 "pedido.horaEntrega",
-//                 "pedido.ubicacion",
-//                 "ubicacion.referencia",
-//                 "pedido.montoTotal",
-//                 "pedido.estado"
-//             )
-//             ->orderBy('pedido.id','desc')
-//             ->where('idRepartidor','=',$idRepartidor)
-//             ->paginate(10);
-//         }else{
-//             $pedido = pedido::join('repartidor','pedido.idRepartidor','=','repartidor.id')
-//             ->join('cliente','cliente.id','=','pedido.idCliente')
-//             ->join('ubicacion','ubicacion.id','=','pedido.ubicacion')
-//             ->select(
-//                 'cliente.nombres',
-//                 'cliente.apellidos',
-//                  DB::raw('CONCAT(nombres," ",apellidos) as cliente'),
-//                 "pedido.fecha",
-//                 "pedido.horaEntrega",
-//                 "pedido.ubicacion",
-//                 "pedido.referencia",
-//                 "pedido.montoTotal",
-//                 "pedido.estado"
-//             )
-//             ->orderBy('pedido.id','desc')
-//             ->where('pedido.'.$criterio, '=',$buscar)
-//             ->where('idRepartidor','=',$idRepartidor)
-//             ->paginate(10);
-//         }
-
-//         return [
-
-//             'pagination' => [
-//                 'total'        => $pedido->total(),
-//                 'current_page' => $pedido->currentPage(),
-//                 'per_page'     => $pedido->perPage(),
-//                 'last_page'    => $pedido->lastPage(),
-//                 'from'         => $pedido->firstItem(),
-//                 'to'           => $pedido->lastItem(),
-//             ],
-//             'pedido' => $pedido,
-//         ];
-//     }
-//  }
+     

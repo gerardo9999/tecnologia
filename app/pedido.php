@@ -13,7 +13,7 @@ class pedido extends Model
         'fechaentrega',
         'hora',
         'horaentrega',
-        'tiempoEntrega',
+        'tiempoentrega',
         'glosa',
         'montototal',
         'estado'

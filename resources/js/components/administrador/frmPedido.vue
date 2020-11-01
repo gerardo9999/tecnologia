@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Pedido
-                   
+
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
@@ -30,11 +30,12 @@
                                 <th>Cliente</th>
                                 <th>Fecha</th>
                                 <th>Fecha Entrega</th>
-                                <th>Hora Entrega</th> 
+                                <th>Hora</th>
+                                <th>Hora Entrega</th>
+                                <th>Tiempo Entrega</th> 
                                 <th>Glosa</th>
                                 <th>Referencia</th>
                                 <th>Monto Total</th>
-                                <th>Repartidor</th>
                                 <th>Estado</th>
                                 <th>Opciones</th>
                             </tr>
@@ -44,29 +45,37 @@
                                 <td v-text="pedido.nombreCompleto"></td>
                                 <td v-text="pedido.fecha"></td>
                                 <td v-text="pedido.fechaEntrega"></td>
+                                <td v-text="pedido.hora"></td>
                                 <td v-text="pedido.horaEntrega"></td>
+                                <td v-text="pedido.tiempoEntrega"></td>
                                 <td v-text="pedido.glosa"></td>
                                 <td v-text="pedido.referencia"></td>
                                 <td v-text="pedido.montoTotal"></td>
-                                <td v-text="pedido.Repartidor"></td>
-                                    <template v-if="pedido.estado==0">
-                                         <td> <span class="badge badge-success">Entregado</span> </td>
-                                    </template>
-                                    <template v-if="pedido.estado==1">
-                                         <td><span class="badge badge-warning">Pendiente</span> </td>
-                                    </template>
-                                    <template v-if="pedido.estado==2">
-                                         <td><span class="badge badge-danger">Cancelado</span> </td>
-                                    </template>
+                                
+                                <template v-if="pedido.estado==0">
+                                    <td><span class="badge badge-warning">Pendiente</span></td>
+                                     &nbsp;
+                                    <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm" >
+                                        <i class="fa fa-check"></i> 
+                                    </button>
+                                </template>
+                                <template v-if="pedido.estado==1">
+                                    <td><span class="badge badge-success">Entregado</span></td>
                                     <td>
                                         <button @click="abrirModal('pedido','repartidor',pedido)" type="button" class="btn btn-info btn-sm" >
                                             <i class="fa fa-car"></i>
                                         </button>
-
+            
                                         <button @click="abrirModal('pedido','glosa',pedido)" type="button" class="btn btn-info btn-sm" >
                                             <i class="fa fa-comment"></i>
                                         </button>
                                     </td>
+                                </template>
+                                <template v-if="pedido.estado==2">
+                                     <td><span class="badge badge-danger">Cancelado</span></td>
+                                     <td></td>
+                                </template>
+
                             </tr>
                         </tbody>
                     </table>
@@ -124,10 +133,9 @@
                             </div>
                         </form>
                     </div>
-
                     </template>           
                     <template v-if="tipoAccion==2">
-                                                            <div class="table-responsive col-md-12 p-4"  >
+                                    <div class="table-responsive col-md-12 p-4"  >
                                         <table class="table table-bordered table-striped table-sm">
                                             <thead>
                                                 <tr>
@@ -135,7 +143,6 @@
                                                     <th>Nombres</th>
                                                     <th>Apellidos</th>
                                                     <th>Opciones</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -289,6 +296,128 @@
                     cons
                 });
             },
+
+               pedidoPediente(id){
+                swal({
+                title: 'El Pedido está Pendiente?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.post('pedido/pendiente',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarPedido(1, '', 'fecha');
+                        swal(
+                        'Pedido Pendiente!',
+                        'Su Pedido esta Pendiente.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
+            },
+            
+
+            pedidoEntregado(id){
+                swal({
+                title: 'El Pedido ha sido Entregado?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.post('pedido/entregado/admin',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarPedido(1, '', 'fecha');
+                        swal(
+                        'Pedido Entregado!',
+                        'Su pedido ha sido Entregado con Exito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
+            },
+
+            pedidocancelado(id){
+                swal({
+                title: 'El Pedido va a ser Cancelado?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.post('pedido/cancelado',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarPedido(1, '', 'fecha');
+                        swal(
+                        'Pedido Cancelado!',
+                        'Su pedido ha sido Cancelado con Exito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
+            },
+
             abrirModal(modelo, accion, data = []) {
                 switch (modelo) {
                     case "pedido":

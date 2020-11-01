@@ -12,13 +12,13 @@ class CreatePedidoTable extends Migration
             
             $table->increments('id');
             $table->date('fecha');
-            $table->time('hora')->default(date('H:i:s'));
             $table->date('fechaentrega');
-            $table->time('tiempoentrega');
-            $table->time('horaentrega')->nullable();
+            $table->time('hora')->default(date('H:i:s'));
+            $table->time('horaentrega')->nullable();     
+            $table->time('tiempoentrega')->nullable();
             $table->string('glosa')->nullable();
             $table->float('montototal');
-            $table->integer('estado');
+            $table->integer('estado')->default;
             // 0  pendiente   //  2 entregado  //3 cancelado 
             $table->integer('idUsuario')->unsigned()->nullable();
             $table->integer('idCliente')->unsigned();
