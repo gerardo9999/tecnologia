@@ -16,12 +16,10 @@
                 <li @click="menu=1" class="nav-item">
                     <a class="nav-link" href="#"><i class="icon-book-open"></i> Pedidos</span></a>
                 </li>
-                
 
-                {{-- Vehiculos --}}
-                <li @click="menu=2" class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-book-open"></i> Vehiculos <span class="badge badge-success"></span></a>
-                </li>
+
+
+                
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>
