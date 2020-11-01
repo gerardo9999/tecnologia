@@ -60,7 +60,6 @@ Vue.component('frm-cliente-reserva', require('./components/cliente/frmReserva').
 Vue.component('frm-cliente-pedido',require('./components/cliente/frmPedido').default);
 
 
-Vue.component('frm-repartidor-vehiculo', require('./components/repartidor/frmVehiculo').default);
 Vue.component('frm-repartidor-pedido',require('./components/repartidor/frmPedido').default);
 
 

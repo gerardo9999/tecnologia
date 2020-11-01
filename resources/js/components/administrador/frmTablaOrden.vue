@@ -31,7 +31,6 @@
                                 <th>Fecha</th>
                                 <th>Monto Total</th>
                                 <th>Opciones</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -94,10 +93,8 @@
                                             {{ montoTotal}} .Bs
                                         </td>
                                     </tr>
-                                </tbody>
-                                
+                                </tbody>                                
                             </table>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
@@ -225,7 +222,7 @@
             detalleOrden(id){
                 let me = this;
 
-                var url = '/detalle?idOrden='+id;
+                var url = '/detalle/orden?idOrden='+id;
 
                 axios.get(url).then((response) => {
                     var respuesta   = response.data;

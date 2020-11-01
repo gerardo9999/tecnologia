@@ -18,8 +18,11 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="fecha" placeholder="Buscar..." wire:model='searchText'>
-                        </div>
+                            <input type="text" class="form-control" name="buscarpor" placeholder="Buscar Producto" wire:model='searchText'>
+                         </div>
+                        
+                            
+
                     </div>
                 </div>
               </div>

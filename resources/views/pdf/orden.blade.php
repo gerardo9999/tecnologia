@@ -37,7 +37,7 @@
         }
 
         #encabezado{
-        text-align: center;
+        text-align: left;
         margin-left: 10%;
         margin-right: 35%;
         font-size: 15px;
@@ -65,6 +65,7 @@
         border-collapse: collapse;
         border-spacing: 0;
         margin-bottom: 15px;
+        
         }
 
         #fac, #fv, #fa{
@@ -74,12 +75,12 @@
 
         #facliente thead{
         padding: 20px;
-        background: #2183E3;
+        /* background: #2183E3; */
         text-align: left;
         border-bottom: 1px solid #FFFFFF;  
         }
 
-        #facvendedor{
+        /* #facvendedor{
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
@@ -91,13 +92,15 @@
         background: #2183E3;
         text-align: center;
         border-bottom: 1px solid #FFFFFF;  
-        }
+        } */
 
         #facarticulo{
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
         margin-bottom: 15px;
+        border:left;
+        text-align: center;
         }
 
         #facarticulo thead{
@@ -114,16 +117,21 @@
     <body>
         <header>
             <div id="logo">
-                {{-- <img src="img/logo2.png" alt="incanatoIT" id="imagen"> --}}
+                 <img src="img/logo1.png" alt="incanatoIT" id="imagen"> 
             </div>
             <div id="datos">
                 <p id="encabezado">
-                    {{-- <b>IncanatoIT</b><br>José Gálvez 1368, Chongoyape - Chiclayo, Perú<br>Telefono:(+51)931742904<br>Email:jcarlos.ad7@gmail.com --}}
+                    <b>Restaurante "Pollos y Cuadriles Roca Chavez"</b>
+                    <br> Av. Circunvalacion esquina Roberto Paz, Montero</b>
+                    <br>Celular: +591 78538688</b>
+                    <br>Correo: rocachavezoficial@gmail.com </b>
                 </p>
             </div>
             <div id="fact">
-                {{-- <p>Factura<br> --}}
-                {{-- 0001-0004</p> --}}
+            <br></br>
+            <br></br>
+            <h6><b>Nro. Orden: {{$orden->id}}</b></h6>
+                
             </div>
         </header>
         <br>
@@ -132,28 +140,33 @@
                 <table id="facliente">
                     <thead>                        
                         <tr>
-                            <th id="fac">Cliente</th>
+                            <th>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                        <br>
+                        <br>
+                        <br>
                             <th><p id="cliente">Sr(a). {{ $cliente->nombres }} {{ $cliente->apellidos }}<br>
-                            Documento: 47715777<br>
-                            Dirección: Zarumilla 113 - Chiclayo<br>
-                            Teléfono: 931742904<br>
-                            Email: jcarlos.ad7@gmail.com</p></th>
+                            Dirección: {{ $cliente->direccion }}<br>
+                            Teléfono: {{ $cliente->telefono }}<br>
+                            Correo: {{ $cliente->email }}<br>
+                            Fecha: {{$orden->fecha}}
+                            </p></th>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
-        <br>
-        <section>
+        <!-- <section>
             <div>
                 <table id="facvendedor">
                     <thead>
                         <tr id="fv">
                             <th>VENDEDOR</th>
+                            
                             <th>FECHA</th>
                         </tr>
                     </thead>
@@ -165,50 +178,35 @@
                     </tbody>
                 </table>
             </div>
-        </section>
-        <br>
+        </section> -->
+       
         <section>
             <div>
                 <table id="facarticulo">
                     <thead>
                         <tr id="fa">
-                            <th>CANT</th>
-                            <th>DESCRIPCION</th>
-                            <th>PRECIO UNIT</th>
-                            <th>DESC.</th>
-                            <th>PRECIO TOTAL</th>
+                            <th>CANTIDAD</th>
+                            <th>PRODUCTO</th>
+                            <th>PRECIO UNITARIO</th>
+                            <th>SUB TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($detalle as $det)
                         <tr>
-                            <td>cant</td>
-                            <td>descripcion del producto descripcion del producto descripcion del producto</td>
-                            <td>precio uni</td>
-                            <td>descuento</td>
-                            <td>precio total</td>
+                            <td>{{$det->cantidad}}</td>
+                            <td>{{$det->nombre}}</td>
+                            <td>{{$det->precio}}</td>
+                            <td>{{$det->subTotal}} .Bs</td>
                         </tr>
+                    @endforeach
                     </tbody>
-                    <tfoot>
+                    <tfoot>   
                         <tr>
                             <th></th>
                             <th></th>
-                            <th></th>
-                            <th>SUBTOTAL</th>
-                            <td>subtotal</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>IVA</th>
-                            <td>iva</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>TOTAL</th>
-                            <td>total</td>
+                            <th style:='padding:30px'>TOTAL</th>
+                            <th>{{$orden->montoTotal}} .Bs</th>       
                         </tr>
                     </tfoot>
                 </table>

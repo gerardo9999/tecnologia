@@ -30,6 +30,7 @@
                                     <th>Fecha</th>
                                     <th>Hora</th>
                                     <th>Observacion</th>
+                                    <th>Estado</th>
                                     <th>Opciones</th>
 
                                 </tr>
@@ -44,10 +45,10 @@
                                     <td v-text="reserva.observacion"></td>
                                      <td>
                                        <div v-if="reserva.estado==1">
-                                         <span class="badge badge-danger">Pendiente</span>
+                                           <span class="badge badge-danger">Pendiente</span>
                                        </div>
                                        <div v-else>
-                                          <span class="badge badge-success">Cancelado</span>
+                                         <span class="badge badge-success">Cancelado</span>
                                        </div>
                                      </td>
                                     <td>
@@ -62,9 +63,9 @@
                                        </template>
                                                                             
                                       <template v-else>
-                                                  <button type="button" @click="reservapendiente(reserva.id)" class="btn btn-danger btn-sm">
-                                                    <i class="icon-lock"></i>
-                                                  </button> &nbsp;
+                                                  <!-- <button type="button" @click="reservapendiente(reserva.id)" class="btn btn-danger btn-sm"> -->
+                                                    <!-- <i class="icon-lock"></i> -->
+                                                  <!-- </button> &nbsp; -->
                                      </template>
 
 
@@ -130,9 +131,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Obseracion</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Observacion</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="observacion" class="form-control" placeholder="Cantidad de Comensales">                                        
+                                        <input type="text" v-model="observacion" class="form-control" placeholder="Observacion">                                        
                                     </div>
                                 </div>
 

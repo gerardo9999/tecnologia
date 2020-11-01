@@ -272,7 +272,7 @@ class ctrlOrdenAtencion extends Controller
 
 
     }
-    public function mostrarDetalle(Request $request){
+    public function mostrarDetalleOrden(Request $request){
 
         $id = $request->idOrden;
         $detalle = detalleOrden::join('ordenatencion','ordenatencion.id','=','detalleorden.idOrdenAtencion')

@@ -54,20 +54,35 @@
                                 
                                 <template v-if="pedido.estado==0">
                                     <td><span class="badge badge-warning">Pendiente</span></td>
+                                    <td>
                                      &nbsp;
-                                    <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm" >
+                                    <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-success btn-sm" >
                                         <i class="fa fa-check"></i> 
                                     </button>
+                                      
+                                    <button @click="abrirModal('pedido','repartidor',pedido)" type="button" class="btn btn-warning btn-sm" >
+                                            <i class="fa fa-car"></i>
+                                    </button>
+            
+                                    <button @click="abrirModal('pedido','glosa',pedido)" type="button" class="btn btn-info btn-sm" >
+                                            <i class="fa fa-comment"></i>
+                                    </button>
+                                    
+                                    <button @click="pedidocancelado(pedido.id)" type="button" class="btn btn-danger btn-sm">
+                                            <i class="icon-trash"></i>
+                                    </button>
+                                    <button type="button" @click="abrirModal('pedido','ver',pedido)" class="btn btn-primary btn-sm">
+                                                 <i class="icon-eye"></i>
+                                    </button>
+
+                                    </td>
                                 </template>
                                 <template v-if="pedido.estado==1">
                                     <td><span class="badge badge-success">Entregado</span></td>
-                                    <td>
-                                        <button @click="abrirModal('pedido','repartidor',pedido)" type="button" class="btn btn-info btn-sm" >
-                                            <i class="fa fa-car"></i>
-                                        </button>
-            
-                                        <button @click="abrirModal('pedido','glosa',pedido)" type="button" class="btn btn-info btn-sm" >
-                                            <i class="fa fa-comment"></i>
+                                    <td>  
+                                        &nbsp;
+                                        <button type="button" @click="abrirModal('pedido','ver',pedido)" class="btn btn-primary btn-sm">
+                                                 <i class="icon-eye"></i>
                                         </button>
                                     </td>
                                 </template>
@@ -164,6 +179,49 @@
                                     </div>
 
                     </template>
+
+                    <template v-if="tipoAccion==3">
+                        <div class="border text-left p-2">
+                                <h6 class="title">Cliente:{{cliente}} </h6>
+                                <h6 class="title">Latitud:{{ ubicacion.latitud }} </h6>
+                                <h6 class="title">Longitud:{{ ubicacion.longitud }} </h6> 
+                                <h6 class="title">Referencia:{{ ubicacion.referencia }} </h6> 
+                                <h6 class="title">Fecha:{{ fecha }}  </h6> 
+                                
+                
+                            </div>
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                                        <td>{{detalle.nombre}}</td>
+                                        <td>{{detalle.precio}}</td>
+                                        <td>{{detalle.cantidad}}</td>
+                                        <td>{{detalle.subTotal}}</td>
+                                    </tr>
+                                     <!-- <tr style="background-color: #CEECF5;">
+                                        <td colspan="3" align="right"><strong>Fecha :</strong></td>
+                                        <td>
+                                            {{ fecha }} 
+                                        </td>
+                                    </tr> -->
+                                     <tr style="background-color: #CEECF5;">
+                                        <td colspan="3" align="right"><strong>Total :</strong></td>
+                                        <td>
+                                            {{ montoTotal}} .Bs
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                    </template>  
                     
 
                     <div class="modal-footer">
@@ -186,7 +244,12 @@
         data() {
             return {
                 ArrayPedido : [],
+                arrayDetalle : [],
                 idPedido : 0,
+                cliente: null,
+                montoTotal: 0,
+                fecha: null,
+                ubicacion: null,
 
                 pagination: {
                     'total': 0,
@@ -258,6 +321,7 @@
                 me.pagination.current_page = page;
                 me.listarPedido(page, buscar, criterio);
             },
+
             cerrarModal(){
                 
                 this.modal=0;
@@ -418,6 +482,22 @@
                 })
             },
 
+               detallePedido(id){
+                let me = this;
+
+                var url = '/detalle/pedido/admin?idPedido='+id;
+
+                axios.get(url).then((response) => {
+                    var respuesta   = response.data;
+                    me.arrayDetalle = respuesta.detalle;
+                    me.ubicacion    = respuesta.ubicacion;
+                    console.log(this.arrayDetalle);
+                    console.log(this.ubicacion);
+l             }).catch((value) => {
+                    console.log(value);
+                });
+            },
+
             abrirModal(modelo, accion, data = []) {
                 switch (modelo) {
                     case "pedido":
@@ -441,10 +521,24 @@
 
                                         break;
                                     }
+                                case 'ver':
+                                    {
+                                                //console.log(data);
+                                        this.modal=1;
+                                        this.tituloModal    ='Ver Detalle';
+                                        this.tipoAccion     = 3;
+
+                                        this.idPedido        = data['id'];
+                                        this.cliente        = data['nombreCompleto'];
+                                        this.montoTotal     = data['montototal'];
+                                        this.fecha          = data['fecha'];
+                                        break;
+                                    }
                             }
                         }
                 }
                 this.allRepartidor();
+                this.detallePedido(this.idPedido);
             }
         },
         mounted() {

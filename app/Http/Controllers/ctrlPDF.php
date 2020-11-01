@@ -14,13 +14,14 @@ class ctrlPDF extends Controller
 
         $ordenatencion = ordenAtencion::join('cliente','cliente.id','ordenatencion.idCliente')
         ->where('ordenatencion.id','=',$id)->get();
+       // [{}]
 
         $orden = ordenAtencion::findOrFail($id);
         $idCliente = $orden->idCliente;
+        //{}
 
         $cliente = cliente::findOrFail($idCliente);
-
-
+      
 
         $detalle =  detalleOrden::join('producto','producto.id','detalleorden.idProducto')
         ->where('detalleorden.idOrdenAtencion','=',$id)->get();
@@ -30,8 +31,10 @@ class ctrlPDF extends Controller
                  "cliente"       => $cliente,
                  "orden"         => $orden
                 ];
+          
+                
         $pdf = PDF::loadView('pdf.orden',$data);
-
+        
         return $pdf->download('orden-atencion.pdf');
     }
 }
