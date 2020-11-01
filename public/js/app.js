@@ -5308,11 +5308,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       ArrayPedido: [],
+      arrayDetalle: [],
       idPedido: 0,
+      cliente: null,
+      montoTotal: 0,
+      fecha: null,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -5505,6 +5551,19 @@ __webpack_require__.r(__webpack_exports__);
         result.dismiss === swal.DismissReason.cancel) {}
       });
     },
+    detallePedido: function detallePedido(id) {
+      var _this5 = this;
+
+      var me = this;
+      var url = '/detalle/pedido/admin?idPedido=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayDetalle = respuesta.detalle;
+        console.log(_this5.arrayDetalle);
+      })["catch"](function (value) {
+        console.log(value);
+      });
+    },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
@@ -5529,11 +5588,25 @@ __webpack_require__.r(__webpack_exports__);
                   this.idPedido = data["id"];
                   break;
                 }
+
+              case 'ver':
+                {
+                  //console.log(data);
+                  this.modal = 1;
+                  this.tituloModal = 'Ver Detalle';
+                  this.tipoAccion = 3;
+                  this.idPedido = data['id'];
+                  this.cliente = data['nombreCompleto'];
+                  this.montoTotal = data['montototal'];
+                  this.fecha = data['fecha'];
+                  break;
+                }
             }
           }
       }
 
       this.allRepartidor();
+      this.detallePedido(this.idPedido);
     }
   },
   mounted: function mounted() {
@@ -7240,7 +7313,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var me = this;
-      var url = '/detalle?idOrden=' + id;
+      var url = '/detalle/orden?idOrden=' + id;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayDetalle = respuesta.detalle;
@@ -8638,11 +8711,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       ArrayPedido: [],
+      arrayDetalle: [],
       idPedido: 0,
+      fecha: null,
+      cliente: 0,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -8654,6 +8782,7 @@ __webpack_require__.r(__webpack_exports__);
       offset: 3,
       criterio: 'fecha',
       buscar: '',
+      montoTotal: 0,
       //Variables del modal
       modal: 0,
       tituloModal: '',
@@ -8807,6 +8936,19 @@ __webpack_require__.r(__webpack_exports__);
         result.dismiss === swal.DismissReason.cancel) {}
       });
     },
+    detallePedido: function detallePedido(id) {
+      var _this5 = this;
+
+      var me = this;
+      var url = '/detalle/pedido/cliente?idPedido=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayDetalle = respuesta.detalle;
+        console.log(_this5.arrayDetalle);
+      })["catch"](function (value) {
+        console.log(value);
+      });
+    },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
@@ -8814,26 +8956,26 @@ __webpack_require__.r(__webpack_exports__);
         case "pedido":
           {
             switch (accion) {
-              case 'repartidor':
+              case 'ver':
                 {
+                  //console.log(data);
                   this.modal = 1;
-                  this.tituloModal = 'Agregar Repartido';
+                  this.tituloModal = 'Ver Detalle';
                   this.tipoAccion = 2;
-                  this.idPedido = data["id"];
-                  break;
-                }
-
-              case 'glosa':
-                {
-                  this.modal = 1;
-                  this.tituloModal = 'Escribir Glosa';
-                  this.tipoAccion = 1;
-                  this.idPedido = data["id"];
+                  this.idPedido = data['id'];
+                  this.cliente = data['nombreCompleto'];
+                  this.montoTotal = data['montototal'];
+                  this.fecha = data['fecha'];
                   break;
                 }
             }
           }
       }
+
+      this.detallePedido(this.idPedido);
+    },
+    eliminarPedido: function eliminarPedido(id) {
+      alert("ejemplo");
     }
   },
   mounted: function mounted() {
@@ -9442,11 +9584,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       ArrayPedido: [],
+      arrayDetalle: [],
       idPedido: 0,
+      fecha: null,
+      montoTotal: 0,
+      cliente: null,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -9618,26 +9802,36 @@ __webpack_require__.r(__webpack_exports__);
         case "pedido":
           {
             switch (accion) {
-              case 'repartidor':
+              case 'ver':
                 {
+                  //console.log(data);
                   this.modal = 1;
-                  this.tituloModal = 'Agregar Repartido';
+                  this.tituloModal = 'Ver Detalle';
                   this.tipoAccion = 2;
-                  this.idPedido = data["id"];
-                  break;
-                }
-
-              case 'glosa':
-                {
-                  this.modal = 1;
-                  this.tituloModal = 'Escribir Glosa';
-                  this.tipoAccion = 1;
-                  this.idPedido = data["id"];
+                  this.idPedido = data['id'];
+                  this.cliente = data['nombreCompleto'];
+                  this.montoTotal = data['montototal'];
+                  this.fecha = data['fecha'];
                   break;
                 }
             }
           }
       }
+
+      this.detallePedido(this.idPedido);
+    },
+    detallePedido: function detallePedido(id) {
+      var _this5 = this;
+
+      var me = this;
+      var url = '/detalle/pedido/repartidor?idPedido=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayDetalle = respuesta.detalle;
+        console.log(_this5.arrayDetalle);
+      })["catch"](function (value) {
+        console.log(value);
+      });
     }
   },
   mounted: function mounted() {
@@ -51869,99 +52063,123 @@ var render = function() {
                       pedido.estado == 0
                         ? [
                             _vm._m(3, true),
-                            _vm._v(
-                              "\n                                  \n                                "
-                            ),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.pedidoEntregado(pedido.id)
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                  \n                                "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.pedidoEntregado(pedido.id)
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-check" })]
-                            ),
-                            _vm._v(
-                              "\n                                   \n                                "
-                            ),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-warning btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.abrirModal(
-                                      "pedido",
-                                      "repartidor",
-                                      pedido
-                                    )
+                                },
+                                [_c("i", { staticClass: "fa fa-check" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-warning btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "repartidor",
+                                        pedido
+                                      )
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-car" })]
-                            ),
-                            _vm._v(
-                              "\n                                       \n        \n                                    "
-                            ),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-info btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.abrirModal(
-                                      "pedido",
-                                      "glosa",
-                                      pedido
-                                    )
+                                },
+                                [_c("i", { staticClass: "fa fa-car" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "glosa",
+                                        pedido
+                                      )
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-comment" })]
-                            ),
-                            _vm._v(
-                              "\n                                      \n                                     "
-                            ),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.pedidocancelado(pedido.id)
+                                },
+                                [_c("i", { staticClass: "fa fa-comment" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.pedidocancelado(pedido.id)
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "icon-trash" })]
-                            ),
-                            _vm._v(
-                              "\n                                     \n                                    "
-                            ),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.verProducto(_vm.menu.id)
+                                },
+                                [_c("i", { staticClass: "icon-trash" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "ver",
+                                        pedido
+                                      )
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "icon-eye" })]
-                            )
+                                },
+                                [_c("i", { staticClass: "icon-eye" })]
+                              )
+                            ])
                           ]
                         : _vm._e(),
                       _vm._v(" "),
                       pedido.estado == 1
-                        ? [_vm._m(4, true), _vm._v(" "), _c("td")]
+                        ? [
+                            _vm._m(4, true),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "  \n                                     \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "ver",
+                                        pedido
+                                      )
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-eye" })]
+                              )
+                            ])
+                          ]
                         : _vm._e(),
                       _vm._v(" "),
                       pedido.estado == 2
@@ -52288,6 +52506,81 @@ var render = function() {
                     ]
                   : _vm._e(),
                 _vm._v(" "),
+                _vm.tipoAccion == 3
+                  ? [
+                      _c("div", { staticClass: "border text-center p-2" }, [
+                        _c("h6", { staticClass: "title" }, [
+                          _vm._v(_vm._s(_vm.cliente))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        {
+                          staticClass:
+                            "table table-bordered table-striped table-sm"
+                        },
+                        [
+                          _vm._m(7),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            [
+                              _vm._l(_vm.arrayDetalle, function(detalle) {
+                                return _c("tr", { key: detalle.id }, [
+                                  _c("td", [_vm._v(_vm._s(detalle.nombre))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(detalle.precio))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(detalle.cantidad))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(detalle.subTotal))])
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                {
+                                  staticStyle: { "background-color": "#CEECF5" }
+                                },
+                                [
+                                  _vm._m(8),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.fecha) +
+                                        " \n                                    "
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "tr",
+                                {
+                                  staticStyle: { "background-color": "#CEECF5" }
+                                },
+                                [
+                                  _vm._m(9),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.montoTotal) +
+                                        " .Bs\n                                    "
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            2
+                          )
+                        ]
+                      )
+                    ]
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "modal-footer" }, [
                   _c(
                     "button",
@@ -52432,6 +52725,38 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Opciones")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sub Total")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Fecha :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Total :")])
     ])
   }
 ]
@@ -57383,28 +57708,99 @@ var render = function() {
                         ? [
                             _vm._m(3, true),
                             _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-info btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.pedidocancelado(pedido.id)
+                            _c("td", [
+                              _vm._v(
+                                "\n                                      \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.pedidocancelado(pedido.id)
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-check" })]
-                            )
+                                },
+                                [_c("i", { staticClass: "fa fa-check" })]
+                              ),
+                              _vm._v(
+                                "\n\n                                      "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "ver",
+                                        pedido
+                                      )
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye" })]
+                              )
+                            ])
                           ]
                         : _vm._e(),
                       _vm._v(" "),
                       pedido.estado == 1
-                        ? [_vm._m(4, true), _vm._v(" "), _c("td")]
+                        ? [
+                            _vm._m(4, true),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                      "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "ver",
+                                        pedido
+                                      )
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye" })]
+                              )
+                            ])
+                          ]
                         : _vm._e(),
                       _vm._v(" "),
                       pedido.estado == 2
-                        ? [_vm._m(5, true), _vm._v(" "), _c("td")]
+                        ? [
+                            _vm._m(5, true),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                      "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.eliminarPedido(pedido.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-trash" })]
+                              )
+                            ])
+                          ]
                         : _vm._e()
                     ],
                     2
@@ -57550,6 +57946,90 @@ var render = function() {
                     ])
                   ]
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "border text-center p-2" }, [
+                  _c("h6", { staticClass: "title" }, [
+                    _vm._v(_vm._s(_vm.cliente))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped table-sm"
+                  },
+                  [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      [
+                        _vm._l(_vm.arrayDetalle, function(detalle) {
+                          return _c("tr", { key: detalle.id }, [
+                            _c("td", [_vm._v(_vm._s(detalle.nombre))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(detalle.precio))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(detalle.cantidad))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(detalle.subTotal))])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "tr",
+                          { staticStyle: { "background-color": "#CEECF5" } },
+                          [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.fecha) +
+                                  " \n                                    "
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "tr",
+                          { staticStyle: { "background-color": "#CEECF5" } },
+                          [
+                            _vm._m(8),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.montoTotal) +
+                                  " .Bs\n                                    "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      2
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                )
               ])
             ])
           ]
@@ -57626,6 +58106,38 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("span", { staticClass: "badge badge-danger" }, [_vm._v("Cancelado")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sub Total")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Fecha :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Total :")])
     ])
   }
 ]
@@ -58475,7 +58987,11 @@ var render = function() {
                                 attrs: { type: "button" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.verProducto(_vm.menu.id)
+                                    return _vm.abrirModal(
+                                      "pedido",
+                                      "ver",
+                                      pedido
+                                    )
                                   }
                                 }
                               },
@@ -58635,6 +59151,90 @@ var render = function() {
                     ])
                   ]
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "border text-center p-2" }, [
+                  _c("h6", { staticClass: "title" }, [
+                    _vm._v(_vm._s(_vm.cliente))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped table-sm"
+                  },
+                  [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      [
+                        _vm._l(_vm.arrayDetalle, function(detalle) {
+                          return _c("tr", { key: detalle.id }, [
+                            _c("td", [_vm._v(_vm._s(detalle.nombre))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(detalle.precio))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(detalle.cantidad))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(detalle.subTotal))])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "tr",
+                          { staticStyle: { "background-color": "#CEECF5" } },
+                          [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.fecha) +
+                                  " \n                                    "
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "tr",
+                          { staticStyle: { "background-color": "#CEECF5" } },
+                          [
+                            _vm._m(8),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.montoTotal) +
+                                  " .Bs\n                                    "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      2
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                )
               ])
             ])
           ]
@@ -58713,6 +59313,38 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("span", { staticClass: "badge badge-danger" }, [_vm._v("Cancelado")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sub Total")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Fecha :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Total :")])
     ])
   }
 ]

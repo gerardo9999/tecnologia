@@ -292,7 +292,7 @@ class ctrlPedido extends Controller
             'pedido' => $pedido,
         ];
     }
-public function mostrarPedidoRepartidor(Request $request){
+    public function mostrarPedidoRepartidor(Request $request){
 
         $repartidor = Auth::id();
         $buscar = $request->buscar;
@@ -307,8 +307,8 @@ public function mostrarPedidoRepartidor(Request $request){
              'pedido.id',
              'cliente.nombres',
              'cliente.apellidos',
-             DB::raw('CONCAT(nombres," ",apellidos) as nombreCompleto'),
              'cliente.login',
+            DB::raw('CONCAT(nombres," ",apellidos) as nombreCompleto'),
              'cliente.password',
              'cliente.empresa',
              'cliente.telefono',
@@ -393,7 +393,49 @@ public function mostrarPedidoRepartidor(Request $request){
         $pedido->estado = 2;
         $pedido->update();
     }
-    
+
+    public function mostrarDetallePedidoAdmin(Request $request){
+        $id = $request->idPedido;
+
+
+        $detalle = detallePedido::join('pedido','pedido.id','=','detallepedido.idPedido')
+        
+        ->join('producto','producto.id','detallepedido.idProducto')
+        ->where('pedido.id',$id)
+        ->get();
+
+
+        return ["detalle" => $detalle];
+
+    }
+
+    public function mostrarDetallePedidoCliente(Request $request){
+        $id = $request->idPedido;
+
+
+        $detalle = detallePedido::join('pedido','pedido.id','=','detallepedido.idPedido')
+        
+        ->join('producto','producto.id','detallepedido.idProducto')
+        ->where('pedido.id',$id)
+        ->where('pedido.idCliente','=',Auth::id())
+        ->get();
+
+
+        return ["detalle" => $detalle];
+    }
+
+    public function mostrarDetallePedidoRepartidor(Request $request){
+        $id = $request->idPedido;
+
+
+        $detalle = detallePedido::join('pedido','pedido.id','=','detallepedido.idPedido')
+        ->join('producto','producto.id','detallepedido.idProducto')->where('pedido.id',$id)
+        ->where('pedido.idRepartidor','=',Auth::id())
+        ->get();
+
+
+        return ["detalle" => $detalle];
+    }
 
 
 }

@@ -225,7 +225,7 @@
             detalleOrden(id){
                 let me = this;
 
-                var url = '/detalle?idOrden='+id;
+                var url = '/detalle/orden?idOrden='+id;
 
                 axios.get(url).then((response) => {
                     var respuesta   = response.data;

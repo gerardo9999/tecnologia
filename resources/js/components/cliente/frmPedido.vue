@@ -49,18 +49,32 @@
                                 <td v-text="pedido.montoTotal"></td>
                                 <template v-if="pedido.estado==0">
                                     <td><span class="badge badge-warning">Pendiente</span></td>
-                                    <button @click="pedidocancelado(pedido.id)" type="button" class="btn btn-info btn-sm">
-                                        <i class="fa fa-check"></i>
-                                    </button>
+                                    <td>
+                                        &nbsp; 
+                                        <button @click="pedidocancelado(pedido.id)" type="button" class="btn btn-info btn-sm">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+
+                                        &nbsp; <button @click="abrirModal('pedido','ver',pedido)" type="button" class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </td>
+                                    
                                 </template>
                                 <template v-if="pedido.estado==1">
                                     <td><span class="badge badge-success">Entregado</span></td>
                                     <td>
+                                        &nbsp; <button @click="abrirModal('pedido','ver',pedido)" type="button" class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
                                     </td>
                                 </template>
                                 <template v-if="pedido.estado==2">
                                     <td><span class="badge badge-danger">Cancelado</span></td>
                                      <td>
+                                        &nbsp; <button @click="eliminarPedido(pedido.id)" type="button" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </td>
                                 </template>
                                    
@@ -86,30 +100,68 @@
 
 
 
+        <!--Inicio del modal agregar/actualizar-->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" v-text="tituloModal"></h4>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="border text-center p-2">
+                                <h6 class="title">{{cliente}}</h6>
+                            </div>
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                                        <td>{{detalle.nombre}}</td>
+                                        <td>{{detalle.precio}}</td>
+                                        <td>{{detalle.cantidad}}</td>
+                                        <td>{{detalle.subTotal}}</td>
+                                    </tr>
+                                     <tr style="background-color: #CEECF5;">
+                                        <td colspan="3" align="right"><strong>Fecha :</strong></td>
+                                        <td>
+                                            {{ fecha }} 
+                                        </td>
+                                    </tr>
+                                     <tr style="background-color: #CEECF5;">
+                                        <td colspan="3" align="right"><strong>Total :</strong></td>
+                                        <td>
+                                            {{ montoTotal}} .Bs
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
 
-
-
-
-
-
-                <!--Inicio del modal agregar/actualizar-->
-        <div class="modal fade" tabindex="-1" :class="{'mostrar' :modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
-                        <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                        </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                        </div>
                     </div>
-
-                    
+                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-content -->
+                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal-dialog -->
-        </div>
         <!--Fin del modal-->   
+
+
+
+
+
+ 
     </main>
 </template>
 
@@ -119,8 +171,10 @@
         data() {
             return {
                 ArrayPedido : [],
+                arrayDetalle : [],
                 idPedido : 0,
-
+                fecha : null,
+                cliente : 0,
                 pagination: {
                     'total': 0,
                     'current_page': 0,
@@ -132,6 +186,7 @@
                 offset: 3,
                 criterio: 'fecha',
                 buscar: '',
+                montoTotal : 0,
 
                 //Variables del modal
                 modal       : 0,
@@ -320,36 +375,51 @@
                 }
                 })
             },
+            detallePedido(id){
+                let me = this;
+
+                var url = '/detalle/pedido/cliente?idPedido='+id;
+
+                axios.get(url).then((response) => {
+                    var respuesta   = response.data;
+                    me.arrayDetalle = respuesta.detalle;
+                    console.log(this.arrayDetalle);
+                }).catch((value) => {
+                    console.log(value);
+                });
+            },
 
             abrirModal(modelo, accion, data = []) {
-                switch (modelo) {
+                switch(modelo){
                     case "pedido":
-                        {
-                            switch (accion) {
-                                case 'repartidor':
-                                    {
-                                        this.modal = 1;
-                                        this.tituloModal = 'Agregar Repartido'
-                                        this.tipoAccion = 2;
-                                        this.idPedido = data["id"];
-                                        break;
-                                    }
-                                case 'glosa':
-                                    {
-                                        this.modal = 1;
-                                        this.tituloModal = 'Escribir Glosa';
-                                        this.tipoAccion = 1;
-                                        this.idPedido = data["id"];
+                    {
+                        switch(accion){
+                  
+                            case 'ver':
+                            {
+                                //console.log(data);
+                                this.modal=1;
+                                this.tituloModal    ='Ver Detalle';
+                                this.tipoAccion     = 2;
 
-
-                                        break;
-                                    }
+                                this.idPedido        = data['id'];
+                                this.cliente        = data['nombreCompleto'];
+                                this.montoTotal     = data['montototal'];
+                                this.fecha          = data['fecha'];
+                                break;
                             }
                         }
+                    }
+
                 }
-                
+                this.detallePedido(this.idPedido);
+            },
+
+            eliminarPedido(id){
+                alert("ejemplo")
             }
         },
+
         mounted() {
             this.listarPedido(1,this.buscar,this.criterio);
         },

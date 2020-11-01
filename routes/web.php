@@ -109,6 +109,12 @@ Route::get('pedidoRepartidor','ctrlPedido@mostrarPedidoRepartidor');
 
 
 Route::post('pedido/entregado','ctrlPedido@entregado');
+Route::get('/detalle/pedido/cliente','ctrlPedido@mostrarDetallePedidoCliente');
+Route::get('/detalle/pedido/admin','ctrlPedido@mostrarDetallePedidoAdmin');
+Route::get('/detalle/pedido/repartidor','ctrlPedido@mostrarDetallePedidoRepartidor');
+
+
+
 
 // pedido/entregado
 
@@ -120,7 +126,7 @@ Route::post('/item/actualizar','ctrlOrdenAtencion@itemActualizar');
 //////------------------Detalle-----------------------------///////
 Route::post('/agregar/producto/detalle','ctrlOrdenAtencion@agregarProductoDetalle');
 Route::get('/orden','ctrlOrdenAtencion@mostrarOrdenes');
-Route::get('/detalle','ctrlOrdenAtencion@mostrarDetalle');
+Route::get('/detalle/orden','ctrlOrdenAtencion@mostrarDetalleOrden');
 // '/detalle/'+ id
 
 
