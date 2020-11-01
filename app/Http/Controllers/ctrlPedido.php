@@ -232,7 +232,7 @@ class ctrlPedido extends Controller
             'pedido.glosa',
             'pedido.montototal',
             'pedido.fecha',
-            'pedido.fechaEntrega',
+            'pedido.fechaentrega',
             'pedido.hora',
             'pedido.horaEntrega',
             'pedido.tiempoEntrega',
