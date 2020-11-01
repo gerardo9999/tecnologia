@@ -130,7 +130,7 @@
                     'to': 0,
                 },
                 offset: 3,
-                criterio: 'cliente',
+                criterio: 'fecha',
                 buscar: '',
 
                 //Variables del modal

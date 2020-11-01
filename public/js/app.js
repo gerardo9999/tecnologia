@@ -8652,7 +8652,7 @@ __webpack_require__.r(__webpack_exports__);
         'to': 0
       },
       offset: 3,
-      criterio: 'cliente',
+      criterio: 'fecha',
       buscar: '',
       //Variables del modal
       modal: 0,
@@ -8852,6 +8852,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -9321,6 +9322,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57809,22 +57815,7 @@ var render = function() {
                               ),
                               _vm._v("  \n                               ")
                             ]
-                          : [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.reservapendiente(reserva.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-lock" })]
-                              ),
-                              _vm._v("  \n                             ")
-                            ],
+                          : void 0,
                         _vm._v(" "),
                         _c(
                           "button",
@@ -58150,7 +58141,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Obseracion")]
+                        [_vm._v("Observacion")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -58164,10 +58155,7 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            placeholder: "Cantidad de Comensales"
-                          },
+                          attrs: { type: "text", placeholder: "Observacion" },
                           domProps: { value: _vm.observacion },
                           on: {
                             input: function($event) {
@@ -58292,6 +58280,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Hora")]),
         _vm._v(" "),
         _c("th", [_vm._v("Observacion")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
         _c("th", [_vm._v("Opciones")])
       ])
@@ -58474,6 +58464,22 @@ var render = function() {
                                 }
                               },
                               [_c("i", { staticClass: "fa fa-check" })]
+                            ),
+                            _vm._v(
+                              "\n                                 \n                                    "
+                            ),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.verProducto(_vm.menu.id)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "icon-eye" })]
                             )
                           ]
                         : _vm._e(),

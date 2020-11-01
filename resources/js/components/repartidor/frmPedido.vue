@@ -54,6 +54,11 @@
                                     <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm">
                                         <i class="fa fa-check"></i>
                                     </button>
+                                    &nbsp;
+                                        <button type="button" @click="verProducto(menu.id)" class="btn btn-primary btn-sm">
+                                                 <i class="icon-eye"></i>
+                                        </button>
+
                                 </template>
                                 <template v-if="pedido.estado==1">
                                     <td><span class="badge badge-success">Entregado</span></td>

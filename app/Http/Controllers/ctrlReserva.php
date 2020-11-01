@@ -84,7 +84,7 @@ class ctrlReserva extends Controller
         $reserva->fecha = $request->fecha;
         $reserva->hora = $request->hora;
         $reserva->observacion = $request->observacion;
-        $reserva->estado = $request->estado;
+        $reserva->estado = 1;
         $reserva->idCliente = $request->idCliente;
         $reserva->save();
 
@@ -207,7 +207,7 @@ class ctrlReserva extends Controller
         $reserva->fecha         = $request->fecha;
         $reserva->hora          = $request->hora;
         $reserva->observacion   = $request->observacion;
-        $reserva->estado        = $request->estado;
+        $reserva->estado        = 1;
         $reserva->idCliente     = $idCliente;
         $reserva->save();
 
