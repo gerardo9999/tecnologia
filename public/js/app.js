@@ -52040,7 +52040,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.fechaEntrega) }
+                        domProps: { textContent: _vm._s(pedido.fechaentrega) }
                       }),
                       _vm._v(" "),
                       _c("td", {
@@ -52048,11 +52048,11 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.horaEntrega) }
+                        domProps: { textContent: _vm._s(pedido.horaentrega) }
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.tiempoEntrega) }
+                        domProps: { textContent: _vm._s(pedido.tiempoentrega) }
                       }),
                       _vm._v(" "),
                       _c("td", {
@@ -52064,7 +52064,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.montoTotal) }
+                        domProps: { textContent: _vm._s(pedido.montototal) }
                       }),
                       _vm._v(" "),
                       pedido.estado == 0
@@ -57686,7 +57686,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.fechaEntrega) }
+                        domProps: { textContent: _vm._s(pedido.fechaentrega) }
                       }),
                       _vm._v(" "),
                       _c("td", {
@@ -57694,11 +57694,11 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.horaEntrega) }
+                        domProps: { textContent: _vm._s(pedido.horaentrega) }
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.tiempoEntrega) }
+                        domProps: { textContent: _vm._s(pedido.tiempoentrega) }
                       }),
                       _vm._v(" "),
                       _c("td", {
@@ -57706,7 +57706,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(pedido.montoTotal) }
+                        domProps: { textContent: _vm._s(pedido.montototal) }
                       }),
                       _vm._v(" "),
                       pedido.estado == 0

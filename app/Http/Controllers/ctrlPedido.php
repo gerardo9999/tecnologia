@@ -201,10 +201,10 @@ class ctrlPedido extends Controller
              'pedido.montototal',
              'pedido.fecha',
              'pedido.estado',
-             'pedido.fechaEntrega',
+             'pedido.fechaentrega',
              'pedido.hora',
-             'pedido.horaEntrega',
-             'pedido.tiempoEntrega',
+             'pedido.horaentrega',
+             'pedido.tiempoentrega',
              'pedido.montototal'
              
              )
@@ -232,10 +232,10 @@ class ctrlPedido extends Controller
             'pedido.glosa',
             'pedido.montototal',
             'pedido.fecha',
-            'pedido.fechaEntrega',
+            'pedido.fechaentrega',
             'pedido.hora',
-            'pedido.horaEntrega',
-            'pedido.tiempoEntrega',
+            'pedido.horaentrega',
+            'pedido.tiempoentrega',
             'pedido.montototal'
             )
 
