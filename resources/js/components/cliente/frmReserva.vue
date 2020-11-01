@@ -42,7 +42,6 @@
                                     <td v-text="reserva.fecha"></td>
                                     <td v-text="reserva.hora"></td>
                                     <td v-text="reserva.observacion"></td>
-
                                      <td>
                                        <div v-if="reserva.estado==1">
                                          <span class="badge badge-danger">Pendiente</span>
@@ -51,7 +50,6 @@
                                           <span class="badge badge-success">Cancelado</span>
                                        </div>
                                      </td>
-
                                     <td>
                                         <button type="button" @click="abrirModal('reserva','actualizar',reserva)" class="btn btn-success btn-sm">
                                             <i class="icon-pencil"></i>

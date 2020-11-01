@@ -679,6 +679,7 @@
             $("#total").html("Bs/. " + total);
             $("#fila" + index).remove();
             evaluar();
+            arrayProducto.splice(index); 
     }
 
     function reservacion(){

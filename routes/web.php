@@ -164,6 +164,10 @@ Route::post('reserva/cliente/modificar','ctrlReserva@modificarReservaCliente');
 
 Route::get('pedido'           ,'ctrlPedido@mostrar');
 
+Route::post('pedido/cancelado','ctrlPedido@estadoCancelado');
+Route::post('pedido/pendiente','ctrlPedido@estadoPendiente');
+Route::post('pedido/entregado/admin','ctrlPedido@estadoEntregado');
+
 //------------------reserva admin----------------//
 Route::post('reserva/cancelada','ctrlReserva@reservacancelada');
 Route::post('reserva/pendiente','ctrlReserva@reservapendiente');
