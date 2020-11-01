@@ -5356,6 +5356,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -52515,35 +52520,46 @@ var render = function() {
                 _vm._v(" "),
                 _vm.tipoAccion == 3
                   ? [
-                      _c("div", { staticClass: "border text-left p-2" }, [
-                        _c("h6", { staticClass: "title" }, [
-                          _vm._v("Cliente:" + _vm._s(_vm.cliente) + " ")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "title" }, [
-                          _vm._v(
-                            "Latitud:" + _vm._s(_vm.ubicacion.latitud) + " "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "title" }, [
-                          _vm._v(
-                            "Longitud:" + _vm._s(_vm.ubicacion.longitud) + " "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "title" }, [
-                          _vm._v(
-                            "Referencia:" +
-                              _vm._s(_vm.ubicacion.referencia) +
-                              " "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "title" }, [
-                          _vm._v("Fecha:" + _vm._s(_vm.fecha) + "  ")
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "border text-left p-2" },
+                        [
+                          _c("dir", { staticClass: "right" }, [
+                            _c("h6", { staticClass: "title" }, [
+                              _vm._v("Cliente:" + _vm._s(_vm.cliente) + " ")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "center" }, [
+                            _c("h6", { staticClass: "title" }, [
+                              _vm._v(
+                                "Latitud:" + _vm._s(_vm.ubicacion.latitud) + " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("h6", { staticClass: "title" }, [
+                              _vm._v(
+                                "Longitud:" +
+                                  _vm._s(_vm.ubicacion.longitud) +
+                                  " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("h6", { staticClass: "title" }, [
+                              _vm._v(
+                                "Referencia:" +
+                                  _vm._s(_vm.ubicacion.referencia) +
+                                  " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("h6", { staticClass: "title" }, [
+                              _vm._v("Fecha:" + _vm._s(_vm.fecha) + "  ")
+                            ])
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "table",

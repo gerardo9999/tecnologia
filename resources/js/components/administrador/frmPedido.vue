@@ -182,11 +182,16 @@
 
                     <template v-if="tipoAccion==3">
                         <div class="border text-left p-2">
+                            <dir class="right">
                                 <h6 class="title">Cliente:{{cliente}} </h6>
+                            </dir>
+                               <div class="center">
                                 <h6 class="title">Latitud:{{ ubicacion.latitud }} </h6>
                                 <h6 class="title">Longitud:{{ ubicacion.longitud }} </h6> 
                                 <h6 class="title">Referencia:{{ ubicacion.referencia }} </h6> 
                                 <h6 class="title">Fecha:{{ fecha }}  </h6> 
+                               </div>
+                            
                                 
                 
                             </div>
