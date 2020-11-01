@@ -5352,6 +5352,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -52511,13 +52515,33 @@ var render = function() {
                 _vm._v(" "),
                 _vm.tipoAccion == 3
                   ? [
-                      _c("div", { staticClass: "border text-center p-2" }, [
+                      _c("div", { staticClass: "border text-left p-2" }, [
+                        _c("h6", { staticClass: "title" }, [
+                          _vm._v("Cliente:" + _vm._s(_vm.cliente) + " ")
+                        ]),
+                        _vm._v(" "),
                         _c("h6", { staticClass: "title" }, [
                           _vm._v(
-                            _vm._s(_vm.cliente) +
-                              "  \n                                " +
-                              _vm._s(_vm.ubicacion.latitud)
+                            "Latitud:" + _vm._s(_vm.ubicacion.latitud) + " "
                           )
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "title" }, [
+                          _vm._v(
+                            "Longitud:" + _vm._s(_vm.ubicacion.longitud) + " "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "title" }, [
+                          _vm._v(
+                            "Referencia:" +
+                              _vm._s(_vm.ubicacion.referencia) +
+                              " "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "title" }, [
+                          _vm._v("Fecha:" + _vm._s(_vm.fecha) + "  ")
                         ])
                       ]),
                       _vm._v(" "),
@@ -52552,24 +52576,6 @@ var render = function() {
                                 },
                                 [
                                   _vm._m(8),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(_vm.fecha) +
-                                        " \n                                    "
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "tr",
-                                {
-                                  staticStyle: { "background-color": "#CEECF5" }
-                                },
-                                [
-                                  _vm._m(9),
                                   _vm._v(" "),
                                   _c("td", [
                                     _vm._v(
@@ -52748,14 +52754,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Sub Total")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
-      _c("strong", [_vm._v("Fecha :")])
     ])
   },
   function() {

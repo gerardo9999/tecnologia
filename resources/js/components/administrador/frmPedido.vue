@@ -181,10 +181,14 @@
                     </template>
 
                     <template v-if="tipoAccion==3">
-                        <div class="border text-center p-2">
-                                <h6 class="title">{{cliente}}  
-                                    {{ ubicacion.latitud }}</h6>
-
+                        <div class="border text-left p-2">
+                                <h6 class="title">Cliente:{{cliente}} </h6>
+                                <h6 class="title">Latitud:{{ ubicacion.latitud }} </h6>
+                                <h6 class="title">Longitud:{{ ubicacion.longitud }} </h6> 
+                                <h6 class="title">Referencia:{{ ubicacion.referencia }} </h6> 
+                                <h6 class="title">Fecha:{{ fecha }}  </h6> 
+                                
+                
                             </div>
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
@@ -202,12 +206,12 @@
                                         <td>{{detalle.cantidad}}</td>
                                         <td>{{detalle.subTotal}}</td>
                                     </tr>
-                                     <tr style="background-color: #CEECF5;">
+                                     <!-- <tr style="background-color: #CEECF5;">
                                         <td colspan="3" align="right"><strong>Fecha :</strong></td>
                                         <td>
                                             {{ fecha }} 
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                      <tr style="background-color: #CEECF5;">
                                         <td colspan="3" align="right"><strong>Total :</strong></td>
                                         <td>
