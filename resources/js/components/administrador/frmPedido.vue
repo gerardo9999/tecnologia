@@ -55,20 +55,30 @@
                                 <template v-if="pedido.estado==0">
                                     <td><span class="badge badge-warning">Pendiente</span></td>
                                      &nbsp;
-                                    <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm" >
+                                    <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-success btn-sm" >
                                         <i class="fa fa-check"></i> 
                                     </button>
-                                </template>
-                                <template v-if="pedido.estado==1">
-                                    <td><span class="badge badge-success">Entregado</span></td>
-                                    <td>
-                                        <button @click="abrirModal('pedido','repartidor',pedido)" type="button" class="btn btn-info btn-sm" >
+                                      &nbsp;
+                                    <button @click="abrirModal('pedido','repartidor',pedido)" type="button" class="btn btn-warning btn-sm" >
                                             <i class="fa fa-car"></i>
                                         </button>
+                                          &nbsp;
             
                                         <button @click="abrirModal('pedido','glosa',pedido)" type="button" class="btn btn-info btn-sm" >
                                             <i class="fa fa-comment"></i>
                                         </button>
+                                         &nbsp;
+                                         <button @click="pedidocancelado(pedido.id)" type="button" class="btn btn-danger btn-sm">
+                                            <i class="icon-trash"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" @click="verProducto(menu.id)" class="btn btn-primary btn-sm">
+                                                 <i class="icon-eye"></i>
+                                        </button>
+                                </template>
+                                <template v-if="pedido.estado==1">
+                                    <td><span class="badge badge-success">Entregado</span></td>
+                                    <td>  
                                     </td>
                                 </template>
                                 <template v-if="pedido.estado==2">
