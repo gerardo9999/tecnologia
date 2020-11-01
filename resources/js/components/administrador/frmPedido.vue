@@ -182,7 +182,9 @@
 
                     <template v-if="tipoAccion==3">
                         <div class="border text-center p-2">
-                                <h6 class="title">{{cliente}}</h6>
+                                <h6 class="title">{{cliente}}  
+                                    {{ ubicacion.latitud }}</h6>
+
                             </div>
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
@@ -243,6 +245,7 @@
                 cliente: null,
                 montoTotal: 0,
                 fecha: null,
+                ubicacion: null,
 
                 pagination: {
                     'total': 0,
@@ -483,8 +486,10 @@
                 axios.get(url).then((response) => {
                     var respuesta   = response.data;
                     me.arrayDetalle = respuesta.detalle;
+                    me.ubicacion    = respuesta.ubicacion;
                     console.log(this.arrayDetalle);
-                }).catch((value) => {
+                    console.log(this.ubicacion);
+l             }).catch((value) => {
                     console.log(value);
                 });
             },

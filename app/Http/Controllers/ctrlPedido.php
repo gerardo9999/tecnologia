@@ -205,7 +205,7 @@ class ctrlPedido extends Controller
              'pedido.hora',
              'pedido.horaEntrega',
              'pedido.tiempoEntrega',
-             'pedido.montoTotal'
+             'pedido.montototal'
              
              )
              ->orderBy('pedido.id','desc')
@@ -236,7 +236,7 @@ class ctrlPedido extends Controller
             'pedido.hora',
             'pedido.horaEntrega',
             'pedido.tiempoEntrega',
-            'pedido.montoTotal'
+            'pedido.montototal'
             )
 
              ->where($criterio.'.nombres', 'like', '%'.$buscar.'%')
@@ -268,11 +268,11 @@ class ctrlPedido extends Controller
                  'pedido.idUbicacion',
                  'pedido.idCliente',
                  'pedido.fecha',
-                 'pedido.fechaEntrega',
+                 'pedido.fechaentrega',
                  'pedido.hora',
-                 'pedido.horaEntrega',
-                 'pedido.tiempoEntrega',
-                 'pedido.montoTotal',
+                 'pedido.horaentrega',
+                 'pedido.tiempoentrega',
+                 'pedido.montototal',
                  'ubicacion.referencia',
                  'cliente.nombres as cliente',
                  'pedido.estado'
@@ -316,12 +316,12 @@ class ctrlPedido extends Controller
              'cliente.email',
              'cliente.estado',
              'pedido.fecha',
-             'pedido.fechaEntrega',
+             'pedido.fechaentrega',
              'pedido.hora',
-             'pedido.horaEntrega',
-             'pedido.tiempoEntrega',
+             'pedido.horaentrega',
+             'pedido.tiempoentrega',
              'ubicacion.referencia',
-             'pedido.montoTotal',
+             'pedido.montototal',
              'pedido.estado'
              )->where('pedido.idRepartidor','=',$repartidor)
              ->orderBy('pedido.id','desc')
@@ -346,12 +346,12 @@ class ctrlPedido extends Controller
             'cliente.email',
             'cliente.estado',
             'pedido.fecha',
-            'pedido.fechaEntrega',
+            'pedido.fechaentrega',
             'pedido.hora',
-            'pedido.horaEntrega',
-            'pedido.tiempoEntrega',
+            'pedido.horaentrega',
+            'pedido.tiempoentrega',
             'ubicacion.referencia',
-            'pedido.montoTotal',
+            'pedido.montototal',
             'pedido.estado'
             )
              ->where('pedido.idRepartidor','=',$repartidor)
@@ -405,7 +405,9 @@ class ctrlPedido extends Controller
         ->get();
 
 
-        return ["detalle" => $detalle];
+        $ubicacion= ubicacion::findOrFail($detalle[0]->idUbicacion);
+
+        return ["detalle" => $detalle, "ubicacion" => $ubicacion];
 
     }
 

@@ -5350,6 +5350,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5359,6 +5361,7 @@ __webpack_require__.r(__webpack_exports__);
       cliente: null,
       montoTotal: 0,
       fecha: null,
+      ubicacion: null,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -5559,7 +5562,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayDetalle = respuesta.detalle;
+        me.ubicacion = respuesta.ubicacion;
         console.log(_this5.arrayDetalle);
+        console.log(_this5.ubicacion);
+        l;
       })["catch"](function (value) {
         console.log(value);
       });
@@ -52507,7 +52513,11 @@ var render = function() {
                   ? [
                       _c("div", { staticClass: "border text-center p-2" }, [
                         _c("h6", { staticClass: "title" }, [
-                          _vm._v(_vm._s(_vm.cliente))
+                          _vm._v(
+                            _vm._s(_vm.cliente) +
+                              "  \n                                " +
+                              _vm._s(_vm.ubicacion.latitud)
+                          )
                         ])
                       ]),
                       _vm._v(" "),
