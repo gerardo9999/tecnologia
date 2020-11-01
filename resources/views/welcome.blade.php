@@ -19,7 +19,7 @@
           
           <div id="title-pedido" style="display: none"; >
             <div class="title-box-d">
-              <h3 class="title-d">Lista de Pedidos</h3>
+              <h3 class="title-d">Mi Pedido</h3>
             </div>
           </div>
         
@@ -50,7 +50,7 @@
         
         <div id="title-pedido" style="display: none"; >
           <div class="title-box-d">
-            <h3 class="title-d">Lista de Pedidos</h3>
+            <h3 class="title-d">Mi Pedido</h3>
           </div>
         </div>
       @endauth
@@ -78,23 +78,28 @@
                 <div class="border p-2">
                     <div class="form-group">
                       <label for="" >Fecha de Entrega</label>
-                      <input id="fecha_entrega" onchange="fechaPedido(this.value)" value="{{ date('Y-m-d') }}" type="date" name="fecha_entrega" class="form-control">
+                      <input id="fecha_entrega" 
+                      onchange="fechaPedido(this.value)" value="{{ date('Y-m-d') }}" type="date" 
+                      name="fecha_entrega" class="form-control form-control-sm">
                     </div>
                     <div class="form-group">
                       <label for="" >Referencia</label>
-                      <input type="text" name="referencia" class="form-control">
+                      <input type="text" name="referencia" class="form-control form-control-sm">
                     </div>
                     <div class="form-group" id="inputHora" style='display: none;'>
                       <label for="" >Hora Entrega</label>
-                      <input id="horaLlegada" onchange="setearHora(this.value)" value='' type="time" name="hora_entrega" class="form-control">
+                      <input id="horaLlegada" 
+                      onchange="setearHora(this.value)" value='' type="time" name="hora_entrega" 
+                      class="form-control form-control-sm">
                     </div>
                     {{-- inputHora --}}
                 </div>
                
+              <div id="tabla-pedido">
                 <div class="card-body">
                     <div class="row">
                         
-                        <div class="col-12 table-responsive">
+                        <div class="table-responsive-sm">
                             <table id="detalles" class="table table-hover table-hover table-bordered">
                                 <thead class="">
                                 <th>Opciones</th>
@@ -119,14 +124,14 @@
                         </div>
                     </div>
                 </div>
-
+              </div>
 
                 <div id="montoTotal">
 
                 </div>
 
                 <!-- Ubicacion -->
-                <div style="display:block;">
+                <div style="display:none;">
                   <div class="form-group" >
                     <input type="text"  class="form-control" readonly required placeholder="latitud" name="textlatitud" id="textlatitud">
                   </div>
@@ -153,108 +158,29 @@
 
                     @auth
                       <button name="guardar" value="auth" type="submit" class="btn btn-sm  btn-outline-danger ">Realizar Pedido</button>
+                    
+                    
                     @else
+                      
                       <div class="datoPersona">
-                        <div class="card-header">
-                          <h6 class="title text-center p-2"> Necesitamos tus datos personales </h6>
-                        </div>
+                        <!-- Button trigger modal -->
+  
 
-                        <div class="row p-2">
-                          <div class="col-md-12 mb-2">
-                            <div class="form-group">
-                            {{-- <label for="Type">Nombre</label> --}}
-                            <input name='nombre' type="text" 
-                            class=" form-control form-control-sm form-control" placeholder="Escriba su nombre">
-                            @error('nombre')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                            </div>
-
-                          </div>
-
-                          <div class="col-md-12 mb-2">
-                              <div class="form-group">
-                              {{-- <label for="Type">Apellidos</label> --}}
-                              <input name='apellidos' type="text" class="form-control form-control-sm form-control" placeholder="Escriba sus apellidos">
-                              @error('apellidos')
-                                  <span class="error">{{ $message }}</span>
-                              @enderror
-                              </div>
-                          </div>
-
-                          <div class="col-md-12 mb-2">
-                              <div class="form-group">
-                                  {{-- <label for="Type">Empresa</label> --}}
-                                  <input name='empresa' type="text" class="form-control form-control-sm form-control" placeholder="Escriba su empresa">
-                                  @error('empresa')
-                                      <span class="error">{{ $message }}</span>
-                                  @enderror
-                              </div>
-                          </div>
-                          
-                          <div class="col-md-12 mb-2">
-                              <div class="form-group">
-                              {{-- <label for="Type">Telefono</label> --}}
-                              <input name='telefono' type="text" class="form-control form-control-sm form-control" placeholder="Digite su numero de telefono">
-                              @error('telefono')
-                                  <span class="error">{{ $message }}</span>
-                              @enderror 
-                              </div>
-                          </div>
-                          
-                          <div class="col-md-12 mb-2">
-                              <div class="form-group">
-                                  {{-- <label for="Type">Direccion</label> --}}
-                                  <input name='direccion' type="text" class="form-control form-control-sm form-control" placeholder="Escibe tu direccion">
-                                  @error('direccion')
-                                      <span class="error">{{ $message }}</span>
-                                  @enderror
-                              </div>
-                          </div>
-
-                          <div class="col-md-12 mb-2">
-                            <div class="form-group">
-                                {{-- <label for="Type">Direccion</label> --}}
-                                <input name='name' type="text" class="form-control form-control-sm form-control" placeholder="Escibe tu nombre de usuario">
-                                @error('direccion')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-                          </div>
-
-                          <div class="col-md-12 mb-2">
-                            <div class="form-group">
-                                {{-- <label for="Type">Direccion</label> --}}
-                                <input name='email' type="text" class="form-control form-control-sm form-control" placeholder="Escibe tu gmail">
-                                @error('email')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-                          </div>
-
-
-                          <div class="col-md-12 mb-2">
-                            <div class="form-group">
-                                {{-- <label for="Type">Direccion</label> --}}
-                                <input name='contraseña' type="password" class="form-control form-control-sm form-control" placeholder="Escibe tu contraseña">
-                                @error('contraseña')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-                          </div>
-                        </div>
 
                       </div>
                     
-                    <div class="border">
-                      <button name="guardar" value="guest" type="submit" class="btn btn-sm btn-block btn-outline-danger ">Realizar Pedido</button>
-                    </div>
+
                     @endauth                  
                   </div>
             </form>
-            
-          
 
+            <button id="boton-realizar-pedido" name="guardar" value="guest" type="submit" class="btn btn-sm btn-block btn-outline-danger" style="display: none">Realizar Pedido</button>
+            
+            {{-- <div class="border">
+            </div> --}}
+              
+            <button id="boton-datos" onclick="mostrarDatos()" style="display: none" type="button" class="btn btn-sm btn-success btn-block" >
+              Envianos tus Datos Personales</button>
             <button type="button" class="btn btn-sm btn-success btn-block" data-target="#maps" data-toggle="modal">Envianos tu Ubicacion</button>
     
 
@@ -461,6 +387,7 @@
                       function addUbicacion(x,y,dir){
 
                       document.getElementById('guardar').style.display="block";
+                      document.getElementById('boton-datos').style.display="block";
                       document.getElementById('divfor').style.display="block";
 
 
@@ -696,6 +623,10 @@
       document.getElementById('pedido').style.display             = 'block' ;
 
 
+    }
+
+    function mostrarDatos(){
+      alert("Correcto");
     }
 
   </script>
