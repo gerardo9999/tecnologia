@@ -174,7 +174,7 @@
             listarPedido(page,buscar,criterio){
                 let me = this;
 
-                var url ='/pedido/admin?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+                var url ='/pedidoRepartidor?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
 
                 axios.get(url).then((response) => {
                     var respuesta    = response.data;

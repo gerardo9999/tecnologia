@@ -107,7 +107,9 @@ Route::get('pedido/admin','ctrlPedido@mostrarPedidoAdmin');
 Route::get('pedidoRepartidor','ctrlPedido@mostrarPedidoRepartidor');
 
 
+
 Route::post('pedido/entregado','ctrlPedido@entregado');
+
 // pedido/entregado
 
 Route::post('/item/eliminar','ctrlOrdenAtencion@itemEliminar');

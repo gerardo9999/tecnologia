@@ -9495,7 +9495,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var me = this;
-      var url = '/pedido/admin?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+      var url = '/pedidoRepartidor?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.ArrayPedido = respuesta.pedido.data;
