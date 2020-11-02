@@ -58,6 +58,7 @@ class ctrlRepartidor extends Controller{
 
             $usuario = new User();
             $usuario->name      = $request->login;
+            $usuario->username      = $request->login;
             $usuario->email     = $request->email;
             $usuario->nombre    = $request->nombre;
             $usuario->apellidos = $request->apellidos;
@@ -93,6 +94,7 @@ class ctrlRepartidor extends Controller{
             
             $usuario            = User::findOrFail($request->id);
             $usuario->name      = $request->login;
+            $usuario->username      = $request->login;
             $usuario->email     = $request->email;
             $usuario->nombre    = $request->nombre;
             $usuario->apellidos = $request->apellidos;

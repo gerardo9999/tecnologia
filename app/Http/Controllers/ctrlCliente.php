@@ -74,6 +74,7 @@ class ctrlCliente extends Controller
                                             
                         $usuario = new User();
                         $usuario->name      = $request->login;
+                        $usuario->username      = $request->login;
                         $usuario->email     = $request->email;
                         $usuario->nombre    = $request->nombres;
                         $usuario->apellidos = $request->apellidos;
@@ -136,6 +137,7 @@ class ctrlCliente extends Controller
 
                 $usuario = User::findOrFail($cliente->id);
                 $usuario->name      = $request->login;
+                $usuario->username      = $request->login;
                 $usuario->email     = $request->email;
                 $usuario->nombre    = $request->nombres;
                 $usuario->apellidos = $request->apellidos;

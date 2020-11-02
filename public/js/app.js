@@ -58366,7 +58366,22 @@ var render = function() {
                               ),
                               _vm._v("  \n                               ")
                             ]
-                          : void 0,
+                          : [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.reservapendiente(reserva.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-lock" })]
+                              ),
+                              _vm._v("  \n                             ")
+                            ],
                         _vm._v(" "),
                         _c(
                           "button",

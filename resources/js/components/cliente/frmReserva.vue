@@ -63,9 +63,9 @@
                                        </template>
                                                                             
                                       <template v-else>
-                                                  <!-- <button type="button" @click="reservapendiente(reserva.id)" class="btn btn-danger btn-sm"> -->
-                                                    <!-- <i class="icon-lock"></i> -->
-                                                  <!-- </button> &nbsp; -->
+                                                  <button type="button" @click="reservapendiente(reserva.id)" class="btn btn-danger btn-sm">
+                                                    <i class="icon-lock"></i>
+                                                  </button> &nbsp;
                                      </template>
 
 
