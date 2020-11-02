@@ -102,7 +102,7 @@ Route::post('/finalizar/orden','ctrlOrdenAtencion@finalizarOrden');
 Route::post('/pedido/store','ctrlPedido@guardar')->name('pedido.store');
 
 /////----------------Pedido Cliente-----------------///
-Route::get('pedido','ctrlPedido@mostrar');
+Route::get('pedido/cliente','ctrlPedido@mostrarPedidoCliente');
 Route::get('pedido/admin','ctrlPedido@mostrarPedidoAdmin');
 Route::get('pedidoRepartidor','ctrlPedido@mostrarPedidoRepartidor');
 
@@ -130,7 +130,9 @@ Route::get('/detalle/orden','ctrlOrdenAtencion@mostrarDetalleOrden');
 // '/detalle/'+ id
 
 
-Route::get('/pdf/orden/{id}','ctrlPDF@generarPDF')->name('orden.pdf');
+Route::get('/pdf/orden/{id}','ctrlPDF@generarPDFOrden')->name('orden.pdf');
+
+Route::get('/pdf/pedido/{id}','ctrlPDF@generarPDFPedido')->name('pedido.pdf');
 
 
 /////----------------Repartidor-----------------///

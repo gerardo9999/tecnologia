@@ -75,6 +75,8 @@
                                                  <i class="icon-eye"></i>
                                     </button>
 
+                                      <button class="btn btn-sm btn-primary" @click="generarPDF(pedido.id)"><i class="icon-doc"></i></button>
+
                                     </td>
                                 </template>
                                 <template v-if="pedido.estado==1">
@@ -341,6 +343,11 @@
                 this.tituloModal='';
                 document.getElementsByTagName("html")[0].style.overflow = "auto";
 
+            },
+
+            generarPDF(id){
+                window.open('http://localhost:8000/pdf/pedido/'+ id +','+'_blank');
+                
             },
             agregarRepartidor(data=[]){
                 let me = this;

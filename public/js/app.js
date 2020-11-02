@@ -5369,6 +5369,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5452,6 +5454,9 @@ __webpack_require__.r(__webpack_exports__);
       this.modal = 0;
       this.tituloModal = '';
       document.getElementsByTagName("html")[0].style.overflow = "auto";
+    },
+    generarPDF: function generarPDF(id) {
+      window.open('http://localhost:8000/pdf/pedido/' + id + ',' + '_blank');
     },
     agregarRepartidor: function agregarRepartidor() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -8854,7 +8859,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var me = this;
-      var url = '/pedido/admin?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+      var url = '/pedido/cliente?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.ArrayPedido = respuesta.pedido.data;
@@ -52176,6 +52181,19 @@ var render = function() {
                                   }
                                 },
                                 [_c("i", { staticClass: "icon-eye" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-primary",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.generarPDF(pedido.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-doc" })]
                               )
                             ])
                           ]
@@ -57993,7 +58011,7 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "border text-left p-2" }, [
                   _c("h6", { staticClass: "title" }, [
-                    _c("b", [_vm._v("Cliente:")]),
+                    _c("b"),
                     _vm._v(_vm._s(_vm.cliente))
                   ]),
                   _vm._v(" "),

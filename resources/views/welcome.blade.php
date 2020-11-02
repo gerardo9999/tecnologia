@@ -178,9 +178,11 @@
             
             {{-- <div class="border">
             </div> --}}
-              
+              @guest
             <button id="boton-datos" onclick="mostrarDatos()" style="display: none" type="button" class="btn btn-sm btn-success btn-block" >
               Envianos tus Datos Personales</button>
+              @endguest
+
             <button type="button" class="btn btn-sm btn-success btn-block" data-target="#maps" data-toggle="modal">Envianos tu Ubicacion</button>
     
 

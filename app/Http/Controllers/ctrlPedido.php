@@ -257,7 +257,7 @@ class ctrlPedido extends Controller
              'pedido' => $pedido
             ];
     }
-    public function mostrar(){
+    public function mostrarPedidoCliente(){
         // if (!$request->ajax()) return redirect('/');
 
         $cliente= Auth::id();

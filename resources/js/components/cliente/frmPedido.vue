@@ -112,7 +112,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="border text-left p-2">
-                                <h6 class="title"><b>Cliente:</b>{{cliente}}</h6>
+                                <h6 class="title"><b></b>{{cliente}}</h6>
                                   <tr>
                                         <td colspan="3" align="right"><strong>Fecha :</strong></td>
                                         <td>
@@ -230,7 +230,7 @@
             listarPedido(page,buscar,criterio){
                 let me = this;
 
-                var url ='/pedido/admin?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+                var url ='/pedido/cliente?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
 
                 axios.get(url).then((response) => {
                     var respuesta    = response.data;
