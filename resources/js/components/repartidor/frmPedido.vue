@@ -43,12 +43,12 @@
                             <tr v-for="pedido in ArrayPedido" :key="pedido.id">
                                 <td v-text="pedido.nombreCompleto"></td>
                                 <td v-text="pedido.fecha"></td>
-                                <td v-text="pedido.fechaEntrega"></td>
+                                <td v-text="pedido.fechaentrega"></td>
                                 <td v-text="pedido.hora"></td>
-                                <td v-text="pedido.horaEntrega"></td>
-                                <td v-text="pedido.tiempoEntrega"></td>
+                                <td v-text="pedido.horaentrega"></td>
+                                <td v-text="pedido.tiempoentrega"></td>
                                 <td v-text="pedido.referencia"></td>
-                                <td v-text="pedido.montoTotal"></td>
+                                <td v-text="pedido.montototal"></td>
                                 <template v-if="pedido.estado==0">
                                     <td><span class="badge badge-warning">Pendiente</span></td>
                                     <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm">
