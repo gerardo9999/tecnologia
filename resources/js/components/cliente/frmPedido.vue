@@ -111,8 +111,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="border text-center p-2">
+                            <div class="border text-left p-2">
                                 <h6 class="title"><b>Cliente:</b>{{cliente}}</h6>
+                                  <tr>
+                                        <td colspan="3" align="right"><strong>Fecha :</strong></td>
+                                        <td>
+                                            {{ fecha }} 
+                                        </td>
+                                    </tr>
                             </div>
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
@@ -130,12 +136,7 @@
                                         <td>{{detalle.cantidad}}</td>
                                         <td>{{detalle.subTotal}}</td>
                                     </tr>
-                                     <tr style="background-color: #CEECF5;">
-                                        <td colspan="3" align="right"><strong>Fecha :</strong></td>
-                                        <td>
-                                            {{ fecha }} 
-                                        </td>
-                                    </tr>
+                                   
                                      <tr style="background-color: #CEECF5;">
                                         <td colspan="3" align="right"><strong>Total :</strong></td>
                                         <td>

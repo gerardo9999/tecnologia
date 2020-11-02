@@ -7233,6 +7233,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
@@ -8616,6 +8623,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -55242,9 +55250,22 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "border text-center p-2" }, [
+                _c("div", { staticClass: "border text-left p-2" }, [
                   _c("h6", { staticClass: "title" }, [
+                    _c("b", [_vm._v("Cliente:")]),
                     _vm._v(_vm._s(_vm.cliente))
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(_vm.fecha) +
+                          " \n                                    "
+                      )
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -55254,7 +55275,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -55270,22 +55291,6 @@ var render = function() {
                             _c("td", [_vm._v(_vm._s(detalle.subTotal))])
                           ])
                         }),
-                        _vm._v(" "),
-                        _c(
-                          "tr",
-                          { staticStyle: { "background-color": "#CEECF5" } },
-                          [
-                            _vm._m(5),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(_vm.fecha) +
-                                  " \n                                    "
-                              )
-                            ])
-                          ]
-                        ),
                         _vm._v(" "),
                         _c(
                           "tr",
@@ -55379,6 +55384,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Fecha :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Producto")]),
@@ -55389,14 +55402,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Sub Total")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
-      _c("strong", [_vm._v("Fecha :")])
     ])
   },
   function() {
@@ -57986,10 +57991,22 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "border text-center p-2" }, [
+                _c("div", { staticClass: "border text-left p-2" }, [
                   _c("h6", { staticClass: "title" }, [
                     _c("b", [_vm._v("Cliente:")]),
                     _vm._v(_vm._s(_vm.cliente))
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(_vm.fecha) +
+                          " \n                                    "
+                      )
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -57999,7 +58016,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -58015,22 +58032,6 @@ var render = function() {
                             _c("td", [_vm._v(_vm._s(detalle.subTotal))])
                           ])
                         }),
-                        _vm._v(" "),
-                        _c(
-                          "tr",
-                          { staticStyle: { "background-color": "#CEECF5" } },
-                          [
-                            _vm._m(7),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(_vm.fecha) +
-                                  " \n                                    "
-                              )
-                            ])
-                          ]
-                        ),
                         _vm._v(" "),
                         _c(
                           "tr",
@@ -58150,6 +58151,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
+      _c("strong", [_vm._v("Fecha :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Producto")]),
@@ -58160,14 +58169,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Sub Total")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
-      _c("strong", [_vm._v("Fecha :")])
     ])
   },
   function() {
