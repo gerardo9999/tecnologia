@@ -5361,6 +5361,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -52520,93 +52528,101 @@ var render = function() {
                 _vm._v(" "),
                 _vm.tipoAccion == 3
                   ? [
-                      _c(
-                        "div",
-                        { staticClass: "border text-left p-2" },
-                        [
-                          _c("dir", { staticClass: "right" }, [
+                      _c("div", { staticClass: "border  p-2" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-6 p-4" }, [
                             _c("h6", { staticClass: "title" }, [
-                              _vm._v("Cliente:" + _vm._s(_vm.cliente) + " ")
+                              _c("b", [_vm._v("Cliente:")]),
+                              _vm._v(" " + _vm._s(_vm.cliente) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("h6", { staticClass: "title" }, [
+                              _c("b", [_vm._v("Fecha:")]),
+                              _vm._v(" " + _vm._s(_vm.fecha) + "  ")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row " }, [
+                          _c("div", { staticClass: "col-md-4" }, [
+                            _c("h6", { staticClass: "title" }, [
+                              _c("b", [_vm._v("Latitud:")]),
+                              _c("br"),
+                              _vm._v(_vm._s(_vm.ubicacion.latitud))
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "center" }, [
+                          _c("div", { staticClass: "col-md-4" }, [
                             _c("h6", { staticClass: "title" }, [
-                              _vm._v(
-                                "Latitud:" + _vm._s(_vm.ubicacion.latitud) + " "
-                              )
-                            ]),
-                            _vm._v(" "),
+                              _c("b", [_vm._v("Longitud:")]),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(_vm._s(_vm.ubicacion.longitud))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-4" }, [
                             _c("h6", { staticClass: "title" }, [
-                              _vm._v(
-                                "Longitud:" +
-                                  _vm._s(_vm.ubicacion.longitud) +
-                                  " "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("h6", { staticClass: "title" }, [
-                              _vm._v(
-                                "Referencia:" +
-                                  _vm._s(_vm.ubicacion.referencia) +
-                                  " "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("h6", { staticClass: "title" }, [
-                              _vm._v("Fecha:" + _vm._s(_vm.fecha) + "  ")
+                              _c("b", [_vm._v("Referencia:")]),
+                              _c("br"),
+                              _vm._v(_vm._s(_vm.ubicacion.referencia))
                             ])
                           ])
-                        ],
-                        1
-                      ),
+                        ])
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "table",
-                        {
-                          staticClass:
-                            "table table-bordered table-striped table-sm"
-                        },
-                        [
-                          _vm._m(7),
-                          _vm._v(" "),
-                          _c(
-                            "tbody",
-                            [
-                              _vm._l(_vm.arrayDetalle, function(detalle) {
-                                return _c("tr", { key: detalle.id }, [
-                                  _c("td", [_vm._v(_vm._s(detalle.nombre))]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(detalle.precio))]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(detalle.cantidad))]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(detalle.subTotal))])
-                                ])
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "tr",
-                                {
-                                  staticStyle: { "background-color": "#CEECF5" }
-                                },
-                                [
-                                  _vm._m(8),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(
-                                      "\n                                        " +
-                                        _vm._s(_vm.montoTotal) +
-                                        " .Bs\n                                    "
-                                    )
+                      _c("div", { staticClass: "col-md-12 p-4" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-bordered table-striped table-sm"
+                          },
+                          [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              [
+                                _vm._l(_vm.arrayDetalle, function(detalle) {
+                                  return _c("tr", { key: detalle.id }, [
+                                    _c("td", [_vm._v(_vm._s(detalle.nombre))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(detalle.precio))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(detalle.cantidad))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(detalle.subTotal))])
                                   ])
-                                ]
-                              )
-                            ],
-                            2
-                          )
-                        ]
-                      )
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "tr",
+                                  {
+                                    staticStyle: {
+                                      "background-color": "#CEECF5"
+                                    }
+                                  },
+                                  [
+                                    _vm._m(8),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.montoTotal) +
+                                          " .Bs\n                                    "
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ],
+                              2
+                            )
+                          ]
+                        )
+                      ])
                     ]
                   : _vm._e(),
                 _vm._v(" "),
@@ -57972,6 +57988,7 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "border text-center p-2" }, [
                   _c("h6", { staticClass: "title" }, [
+                    _c("b", [_vm._v("Cliente:")]),
                     _vm._v(_vm._s(_vm.cliente))
                   ])
                 ]),

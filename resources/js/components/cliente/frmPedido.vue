@@ -112,7 +112,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="border text-center p-2">
-                                <h6 class="title">{{cliente}}</h6>
+                                <h6 class="title"><b>Cliente:</b>{{cliente}}</h6>
                             </div>
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
