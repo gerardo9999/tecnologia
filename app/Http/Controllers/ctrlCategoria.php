@@ -72,7 +72,7 @@ class ctrlCategoria extends Controller{
     public function delete(Request $request){
 
         $categoria= categoria::findOrFail($request->id);
-        $bitacora = bitacora::guardar('categoria','eliminar');
+        $bitacora = bitacora::guardar('categoria','eliminar',$categoria->id);
         $categoria->delete();
 
         $bitacora = bitacora::guardar('categoria','delete',$categoria->id);

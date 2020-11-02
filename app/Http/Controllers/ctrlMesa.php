@@ -58,7 +58,7 @@ class ctrlMesa extends Controller
         $mesa->ubicacion = $request->ubicacion;
         $mesa->save();
 
-        $bitacora = bitacora::guardar('mesa','actualizar');
+        $bitacora = bitacora::guardar('mesa','actualizar',$mesa->id);
 
     }
     public function eliminar(Request $request){

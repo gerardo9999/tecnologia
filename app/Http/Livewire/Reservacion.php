@@ -141,6 +141,7 @@ class Reservacion extends Component{
             DB::beginTransaction();
             $usuario            = new User();
             $usuario->name      = $this->login;
+            $usuario->username      = $this->login;
             $usuario->email     = $this->email;
             $usuario->password  = Hash::make($this->password);
             $usuario->nombre    = $this->nombre;

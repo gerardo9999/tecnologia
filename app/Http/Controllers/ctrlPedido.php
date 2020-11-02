@@ -42,6 +42,7 @@ class ctrlPedido extends Controller
             $ubicacion->longitud   = $request->textlongitud;
             $ubicacion->url        = $request->textlink;
             $ubicacion->save();
+            $bitacora=bitacora::guardar('ubicacion','guardar',$ubicacion->id);
 
             $pedido = new pedido();
             $pedido->fecha = date('Y-m-d');
@@ -68,10 +69,12 @@ class ctrlPedido extends Controller
                 $detalle->idPedido = $pedido->id;
                 $detalle->idProducto = $request->idproducto[$i];
                 $detalle->save();
+                $bitacora=bitacora::guardar('pedido','guardar',$detalle->id);
             }
             $pedidoUser = pedido::findOrFail($pedido->id);
             $pedidoUser->idUsuario = Auth::id();
             $pedidoUser->update();
+            $bitacora=bitacora::guardar('pedido','guardar',$pedido->id);
 
         }else{
 
@@ -378,6 +381,7 @@ class ctrlPedido extends Controller
         $pedido= pedido::findOrFail($request->id);
         $pedido->estado = 0;
         $pedido->update();
+        $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
 
     }
 
@@ -385,6 +389,7 @@ class ctrlPedido extends Controller
         $pedido= pedido::findOrFail($request->id);
         $pedido->estado = 1;
         $pedido->update();
+        $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
     }
 
 
@@ -392,6 +397,7 @@ class ctrlPedido extends Controller
         $pedido= pedido::findOrFail($request->id);
         $pedido->estado = 2;
         $pedido->update();
+        $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
     }
 
     public function mostrarDetallePedidoAdmin(Request $request){

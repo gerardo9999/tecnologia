@@ -95,7 +95,7 @@ class ctrlMenu extends Controller
             $producto = producto::findOrFail($det['id']);
             $producto->precio = $precio->precio;
             $producto->update(); 
-            $bitacora = bitacora::guardar('producto','actualizar',$precio);
+            $bitacora = bitacora::guardar('producto','actualizar',$producto->id);
 
 
 
