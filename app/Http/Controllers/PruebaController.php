@@ -142,6 +142,7 @@ class PruebaController extends Controller
 
         $usuario = new User();
         $usuario->name      = $login;
+        $usuario->username      = $login;
         $usuario->email     = $email;
         $usuario->nombre    = $nombre;
         $usuario->apellidos = $apellidos;
@@ -197,6 +198,8 @@ class PruebaController extends Controller
 
         $usuario = new User();
         $usuario->name      = $login;
+        $usuario->username      = $login;
+
         $usuario->email     = $email;
         $usuario->nombre    = $nombre;
         $usuario->apellidos = $apellidos;
@@ -289,9 +292,9 @@ class PruebaController extends Controller
             
             $nombres    = ["Gerardo","Miguel","Eldy"];
             $apellidos  = ["Arias Justiniano","Ortega Sanchez","Maldonado Cuellar"];
-            $logins     = ["gerardo99777","miguel9999","eldy233"];
+            $logins     = ["admin","repartidor","cliente"];
             $emails     = ["gerardoarias23@gmail.com","miguel09@gmail.com","eldymacu23@gmail.com"];
-            $password   = Hash::make( "23defebrero");
+            $password   = Hash::make( "admin");
             $roles   = ["administrador","repartidor","cliente"];          
             $length = count($nombres);
             $telefonos = ["776873687","78797987","65256521"];
@@ -302,6 +305,7 @@ class PruebaController extends Controller
 
                 $usuario = new User();
                 $usuario->name      = $logins[$i];
+                $usuario->username      = $logins[$i];
                 $usuario->email     = $emails[$i];
                 $usuario->nombre    = $nombres[$i];
                 $usuario->apellidos = $apellidos[$i];
@@ -386,6 +390,7 @@ class PruebaController extends Controller
                 $idUser = $this->buscarId($cliente->email);
                 $usuario = User::findOrFail($idUser);
                 $usuario->name      = $login;
+                $usuario->username      = $login;
                 $usuario->email     = $email;
                 $usuario->nombre    = $nombres;
                 $usuario->apellidos = $apellidos;
@@ -401,6 +406,8 @@ class PruebaController extends Controller
                     $usuario = new User();
                     $usuario->name      = $login;
                     $usuario->email     = $email;
+                    $usuario->username      = $login;
+
                     $usuario->nombre    = $nombres;
                     $usuario->apellidos = $apellidos;
                     $usuario->password = $password; 

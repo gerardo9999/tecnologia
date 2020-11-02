@@ -495,7 +495,7 @@
                 })
             },
 
-               detallePedido(id){
+            detallePedido(id){
                 let me = this;
 
                 var url = '/detalle/pedido/admin?idPedido='+id;

@@ -13,9 +13,9 @@
             <div class="input-group mb-3">
             
               <span class="input-group-addon"><i class="icon-user"></i></span>
-              <input id="email" type="email" type="text" name="email"  class="form-control @error('password') is-invalid @enderror"  value="{{ old('email') }}" required autocomplete="email" autofocus class="form-control">
+              <input id="email" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
             </div>
-            @error('email')
+            @error('username')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
