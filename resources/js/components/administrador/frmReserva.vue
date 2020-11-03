@@ -44,6 +44,7 @@
                                     <th>Fecha</th>
                                     <th>Hora</th>
                                     <th>Observacion</th>
+                                    <th>Estado</th>
                                     <th>Opciones</th>
 
                                 </tr>

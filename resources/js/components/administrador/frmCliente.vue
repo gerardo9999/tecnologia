@@ -49,7 +49,7 @@
                                     <td><span class="badge badge-success">Activo</span></td>
                                 </template>
                                 <template v-else>
-                                    <td class="text-center"><span class="badge badge-danger">Inactivo</span></td>
+                                    <td class="text-left"><span class="badge badge-danger">Inactivo</span></td>
                                 </template>
                                 <td>
                                         <button type="button" @click="abrirModal('cliente','actualizar',cliente)" class="btn btn-success btn-sm">

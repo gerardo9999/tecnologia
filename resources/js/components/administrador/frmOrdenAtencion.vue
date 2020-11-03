@@ -72,12 +72,7 @@
                             <button @click="mostrarListaMesa()" class="btn btn-sm btn-secondary">Cerrar</button>
                                 &nbsp;
                             <button class="btn btn-sm btn-primary" @click="finalizarOrdenAtencion()">Finalizar</button>
-                            <button @click="mostrarListaMesa()" class="btn btn-sm btn-secondary">Cerrar</button>
-                                &nbsp;
-                            <button class="btn btn-sm btn-primary" @click="finalizarOrdenAtencion()">Imprimir Orden</button>
                         </div>
-                      
-
                     </div>
                 </template>
 

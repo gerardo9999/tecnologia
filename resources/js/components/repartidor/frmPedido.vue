@@ -108,8 +108,32 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="border text-center p-2">
-                                <h6 class="title">{{cliente}}</h6>
+                            <div class="border text-left p-2">
+                                <h6 class="title"><b>Cliente:&nbsp;</b>{{cliente}}</h6>
+                                  <tr>
+                                        <td colspan="3" align="left"><strong>Fecha :</strong></td>
+                                        <td>
+                                            {{ fecha}} 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left"><strong>Latitud :</strong></td>
+                                        <td>
+                                            {{latitud}} 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left"><strong>Longitud : </strong></td>
+                                        <td>
+                                            {{longitud}} 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="left"><strong>Referencia :&nbsp;</strong></td>
+                                        <td>
+                                            {{referencia}} 
+                                        </td>
+                                    </tr>                                    
                             </div>
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
@@ -127,12 +151,7 @@
                                         <td>{{detalle.cantidad}}</td>
                                         <td>{{detalle.subTotal}}</td>
                                     </tr>
-                                     <tr style="background-color: #CEECF5;">
-                                        <td colspan="3" align="right"><strong>Fecha :</strong></td>
-                                        <td>
-                                            {{ fecha }} 
-                                        </td>
-                                    </tr>
+                                   
                                      <tr style="background-color: #CEECF5;">
                                         <td colspan="3" align="right"><strong>Total :</strong></td>
                                         <td>
@@ -167,6 +186,10 @@
                 fecha: null,
                 montoTotal : 0,
                 cliente : null,
+                ubicacion:null,
+                latitud:null,
+                longitud:null,
+                referencia:null,
                 pagination: {
                     'total': 0,
                     'current_page': 0,
@@ -396,10 +419,15 @@
 
                 var url = '/detalle/pedido/repartidor?idPedido='+id;
 
-                axios.get(url).then((response) => {
+                axios.get(url).then((response)=>  {
                     var respuesta   = response.data;
                     me.arrayDetalle = respuesta.detalle;
-                    console.log(this.arrayDetalle);
+                    me.ubicacion= respuesta.ubicacion;
+                    me.latitud= me.ubicacion.latitud;
+                    me.longitud= me.ubicacion.longitud;
+                    me.referencia= me.ubicacion.referencia;
+                    console.log(this.ubicacion.latitud);
+                    console.log(this.ubicacion);
                 }).catch((value) => {
                     console.log(value);
                 });

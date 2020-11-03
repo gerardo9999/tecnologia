@@ -6,6 +6,7 @@ use App\cliente;
 use App\detalleOrden;
 use App\detallePedido;
 use App\pedido;
+use App\bitacora;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 

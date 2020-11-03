@@ -131,7 +131,7 @@
                 </div>
 
                 <!-- Ubicacion -->
-                <div style="display:none;">
+                <div style="display:block;">
                   <div class="form-group" >
                     <input type="text"  class="form-control" readonly required placeholder="latitud" name="textlatitud" id="textlatitud">
                   </div>
@@ -389,7 +389,7 @@
                       function addUbicacion(x,y,dir){
 
                       document.getElementById('guardar').style.display="block";
-                      document.getElementById('boton-datos').style.display="block";
+                      //document.getElementById('boton-datos').style.display="block";
                       document.getElementById('divfor').style.display="block";
 
 
@@ -543,7 +543,8 @@
           var fila = `<tr class="selected" id="fila${cont}">
                                   <td><button type="button" class="btn btn-outline-warning" onclick="eliminar(${cont});">X</button></td>
                                   <td>${producto.nombre}</td>
-                                  <td><input type="number" id="${cont}" name="cantidad[]" value="${productoCantidad}"  class="form-control"></td>
+
+                                  <td><input readonly type="number" id="${cont}" name="cantidad[]" value="${productoCantidad}"  class="form-control"></td>
                                   <td><input type="number" readonly name="precio[]" value="${producto.precio}"  class="form-control"></td>
                                   <td>${subtotal[cont]}</td>
                               </tr>

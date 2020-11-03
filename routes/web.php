@@ -30,7 +30,6 @@ Route::post('categoria/eliminar','ctrlCategoria@delete');
 Route::get('/categoria/selectCategoria', 'ctrlCategoria@selectCategoria');
 
 
-
 /////----------------Producto-----------------///
 Route::get('producto','ctrlProducto@mostrar');
 Route::post('producto/guardar','ctrlProducto@guardar');
@@ -60,8 +59,7 @@ Route::post('mesa/modificar','ctrlMesa@modificar');
 Route::post('mesa/libre','ctrlMesa@libre');
 Route::post('mesa/ocupado','ctrlMesa@ocupado');
 Route::post('mesa/eliminar','ctrlMesa@eliminar');
-
-
+ 
 
 /////----------------Rol-----------------///
 Route::get('rol','ctrlRol@rolUser');
@@ -113,8 +111,9 @@ Route::get('/detalle/pedido/cliente','ctrlPedido@mostrarDetallePedidoCliente');
 Route::get('/detalle/pedido/admin','ctrlPedido@mostrarDetallePedidoAdmin');
 Route::get('/detalle/pedido/repartidor','ctrlPedido@mostrarDetallePedidoRepartidor');
 
+//-----glosa---//
 
-
+Route::post('/agregar/glosa','ctrlPedido@agregarGlosa');
 
 // pedido/entregado
 

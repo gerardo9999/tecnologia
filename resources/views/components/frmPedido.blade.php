@@ -6,25 +6,7 @@
 
                 <h1 class="title-single">Nuestros Productos</h1>
               
-                <div class="title-single-box p-4 text-center">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="grid-option">
-                                <select wire:model='categoria' class="custom-select">
-                                @foreach (@menuCategoria() as $item)
-                                    <option selected>{{ $item->nombre }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" name="buscarpor" placeholder="Buscar Producto" wire:model='searchText'>
-                         </div>
-                        
-                            
-
-                    </div>
-                </div>
+               
               </div>
             </div>
           </div>

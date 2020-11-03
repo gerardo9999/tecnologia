@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\ubicacion;
 use App\pedido;
 use App\detallePedido;
+use App\bitacora;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,7 @@ class ctrlPedido extends Controller
 {      
     public function guardar(Request $request){
         $hora1= date('H:i:s'); 
-        
+       //return $request ;
         
 
         if (empty($request->hora_entrega)) {
@@ -219,7 +220,7 @@ class ctrlPedido extends Controller
          }
          else{
             $pedido= pedido::join('cliente','cliente.id','=','pedido.idCliente')
-            ->join('ubicacion','ubicacion.id','=','pedido.ubicacion')
+            ->join('ubicacion','ubicacion.id','=','pedido.idUbicacion')
             ->select('cliente.id as idCliente',
             'pedido.id',
             'cliente.nombres',
@@ -441,10 +442,19 @@ class ctrlPedido extends Controller
         ->where('pedido.idRepartidor','=',Auth::id())
         ->get();
 
+        $ubicacion=ubicacion::findOrFail($detalle[0]->idUbicacion);
 
-        return ["detalle" => $detalle];
+
+        return ["detalle" => $detalle,'ubicacion'=>$ubicacion];
     }
-
+   
+    public function agregarGlosa(Request $request){
+        $pedido=pedido::findOrFail($request->id);
+        $pedido->glosa=$request->glosa;
+        $pedido->update();
+        
+        $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
+    }
 
 }
 

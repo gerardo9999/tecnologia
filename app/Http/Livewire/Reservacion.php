@@ -108,6 +108,7 @@ class Reservacion extends Component{
             $reserva->hora        = $this->hora;
             $reserva->telefono    = $telefono;
             $reserva->observacion = $this->observacion;
+            $reserva->estado   = 1;
             $reserva->idCliente   = $usuario_id;
             $reserva->save();
 
@@ -170,6 +171,7 @@ class Reservacion extends Component{
             $reserva->telefono    = $this->telefono;
             $reserva->hora        = $this->hora;
             $reserva->observacion = $this->observacion;
+            $reserva->estado    = 1;
             $reserva->idCliente   = $cliente->id;
             $reserva->save();
 

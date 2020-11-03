@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\producto;
 use App\restaurante;
+
 use Illuminate\Http\Request;
 
 class ctrlRestaurante extends Controller

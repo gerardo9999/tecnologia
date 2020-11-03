@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\tipo;
+use App\bitacora;
 use Illuminate\Http\Request;
 
 class ctrlTipo extends Controller

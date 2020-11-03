@@ -4628,11 +4628,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -5365,12 +5360,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5381,6 +5370,7 @@ __webpack_require__.r(__webpack_exports__);
       montoTotal: 0,
       fecha: null,
       ubicacion: null,
+      glosa: null,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -5454,9 +5444,6 @@ __webpack_require__.r(__webpack_exports__);
       this.modal = 0;
       this.tituloModal = '';
       document.getElementsByTagName("html")[0].style.overflow = "auto";
-    },
-    generarPDF: function generarPDF(id) {
-      window.open('http://localhost:8000/pdf/pedido/' + id + ',' + '_blank');
     },
     agregarRepartidor: function agregarRepartidor() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -5592,6 +5579,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log(value);
       });
     },
+    agregarGlosa: function agregarGlosa() {
+      var me = this;
+      axios.post('/agregar/glosa', {
+        'glosa': this.glosa,
+        'id': this.idPedido
+      }).then(function (response) {
+        me.cerrarModal();
+        me.listarPedido(1, '', 'cliente');
+        iziToast.info({
+          title: 'Exito!',
+          message: 'Se ha agregado la glosa'
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
@@ -5614,6 +5617,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.tituloModal = 'Escribir Glosa';
                   this.tipoAccion = 1;
                   this.idPedido = data["id"];
+                  this.glosa = data['glosa'];
                   break;
                 }
 
@@ -6471,6 +6475,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -9655,6 +9660,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9664,6 +9688,10 @@ __webpack_require__.r(__webpack_exports__);
       fecha: null,
       montoTotal: 0,
       cliente: null,
+      ubicacion: null,
+      latitud: null,
+      longitud: null,
+      referencia: null,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -9861,7 +9889,12 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.arrayDetalle = respuesta.detalle;
-        console.log(_this5.arrayDetalle);
+        me.ubicacion = respuesta.ubicacion;
+        me.latitud = me.ubicacion.latitud;
+        me.longitud = me.ubicacion.longitud;
+        me.referencia = me.ubicacion.referencia;
+        console.log(_this5.ubicacion.latitud);
+        console.log(_this5.ubicacion);
       })["catch"](function (value) {
         console.log(value);
       });
@@ -48509,7 +48542,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-center" }, [
+    return _c("td", { staticClass: "text-left" }, [
       _c("span", { staticClass: "badge badge-danger" }, [_vm._v("Inactivo")])
     ])
   }
@@ -50694,34 +50727,6 @@ var render = function() {
                         }
                       },
                       [_vm._v("Finalizar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-secondary",
-                        on: {
-                          click: function($event) {
-                            return _vm.mostrarListaMesa()
-                          }
-                        }
-                      },
-                      [_vm._v("Cerrar")]
-                    ),
-                    _vm._v(
-                      "\n                             \n                        "
-                    ),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-primary",
-                        on: {
-                          click: function($event) {
-                            return _vm.finalizarOrdenAtencion()
-                          }
-                        }
-                      },
-                      [_vm._v("Imprimir Orden")]
                     )
                   ])
                 ])
@@ -52181,19 +52186,6 @@ var render = function() {
                                   }
                                 },
                                 [_c("i", { staticClass: "icon-eye" })]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-sm btn-primary",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.generarPDF(pedido.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-doc" })]
                               )
                             ])
                           ]
@@ -52400,7 +52392,7 @@ var render = function() {
                                   staticClass: "col-md-3 form-control-label",
                                   attrs: { for: "text-input" }
                                 },
-                                [_vm._v("Nombre")]
+                                [_vm._v("Glosa")]
                               ),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-md-9" }, [
@@ -52409,57 +52401,27 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.nombre,
-                                      expression: "nombre"
+                                      value: _vm.glosa,
+                                      expression: "glosa"
                                     }
                                   ],
                                   staticClass: "form-control",
                                   attrs: {
                                     type: "text",
-                                    placeholder: "Nombre"
+                                    placeholder: "Escribir Glosa"
                                   },
-                                  domProps: { value: _vm.nombre },
+                                  domProps: { value: _vm.glosa },
                                   on: {
                                     input: function($event) {
                                       if ($event.target.composing) {
                                         return
                                       }
-                                      _vm.nombre = $event.target.value
+                                      _vm.glosa = $event.target.value
                                     }
                                   }
                                 })
                               ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errorCategoria,
-                                    expression: "errorCategoria"
-                                  }
-                                ],
-                                staticClass: "form-group row div-error"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "text-center text-error" },
-                                  _vm._l(_vm.errorMostrarMsjCategoria, function(
-                                    error
-                                  ) {
-                                    return _c("div", {
-                                      key: error,
-                                      domProps: { textContent: _vm._s(error) }
-                                    })
-                                  }),
-                                  0
-                                )
-                              ]
-                            )
+                            ])
                           ]
                         )
                       ])
@@ -52675,27 +52637,11 @@ var render = function() {
                           attrs: { type: "button" },
                           on: {
                             click: function($event) {
-                              return _vm.agregarRepartidor()
-                            }
-                          }
-                        },
-                        [_vm._v("Guardar")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.tipoAccion == 2
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
                               return _vm.agregarGlosa()
                             }
                           }
                         },
-                        [_vm._v("Modificar")]
+                        [_vm._v("Escribir Glosa")]
                       )
                     : _vm._e()
                 ])
@@ -55037,6 +54983,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Hora")]),
         _vm._v(" "),
         _c("th", [_vm._v("Observacion")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
         _c("th", [_vm._v("Opciones")])
       ])
@@ -59226,9 +59174,58 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "border text-center p-2" }, [
+                _c("div", { staticClass: "border text-left p-2" }, [
                   _c("h6", { staticClass: "title" }, [
+                    _c("b", [_vm._v("Cliente: ")]),
                     _vm._v(_vm._s(_vm.cliente))
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(_vm.fecha) +
+                          " \n                                    "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(_vm.latitud) +
+                          " \n                                    "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(_vm.longitud) +
+                          " \n                                    "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                        " +
+                          _vm._s(_vm.referencia) +
+                          " \n                                    "
+                      )
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -59238,7 +59235,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(10),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -59259,23 +59256,7 @@ var render = function() {
                           "tr",
                           { staticStyle: { "background-color": "#CEECF5" } },
                           [
-                            _vm._m(7),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                        " +
-                                  _vm._s(_vm.fecha) +
-                                  " \n                                    "
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "tr",
-                          { staticStyle: { "background-color": "#CEECF5" } },
-                          [
-                            _vm._m(8),
+                            _vm._m(11),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
@@ -59391,6 +59372,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
+      _c("strong", [_vm._v("Fecha :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
+      _c("strong", [_vm._v("Latitud :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
+      _c("strong", [_vm._v("Longitud : ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
+      _c("strong", [_vm._v("Referencia : ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Producto")]),
@@ -59401,14 +59414,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Sub Total")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "right" } }, [
-      _c("strong", [_vm._v("Fecha :")])
     ])
   },
   function() {

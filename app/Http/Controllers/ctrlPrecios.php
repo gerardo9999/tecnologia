@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\precios;
 use App\producto;
+use App\bitacora;
 
 
 class ctrlPrecios extends Controller

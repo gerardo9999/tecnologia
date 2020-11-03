@@ -75,7 +75,7 @@
                                                  <i class="icon-eye"></i>
                                     </button>
 
-                                      <button class="btn btn-sm btn-primary" @click="generarPDF(pedido.id)"><i class="icon-doc"></i></button>
+                                    
 
                                     </td>
                                 </template>
@@ -136,18 +136,12 @@
                         <div class="modal-body">
                         <form  method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-group row">
-                                <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
+                                <label class="col-md-3 form-control-label" for="text-input">Glosa</label>
                                 <div class="col-md-9">
-                                    <input type="text" v-model="nombre" class="form-control" placeholder="Nombre">
+                                    <input type="text" v-model="glosa" class="form-control" placeholder="Escribir Glosa">
                                 </div>
                             </div>
-                            <div v-show="errorCategoria" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjCategoria" :key="error" v-text="error">
-
-                                    </div>
-                                </div>
-                            </div>
+                           
                         </form>
                     </div>
                     </template>           
@@ -241,8 +235,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                        <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="agregarRepartidor()">Guardar</button>
-                        <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="agregarGlosa()">Modificar</button>
+                        <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="agregarGlosa()">Escribir Glosa</button>
+                      
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -265,6 +259,7 @@
                 montoTotal: 0,
                 fecha: null,
                 ubicacion: null,
+                glosa:null,
 
                 pagination: {
                     'total': 0,
@@ -343,11 +338,6 @@
                 this.tituloModal='';
                 document.getElementsByTagName("html")[0].style.overflow = "auto";
 
-            },
-
-            generarPDF(id){
-                window.open('http://localhost:8000/pdf/pedido/'+ id +','+'_blank');
-                
             },
             agregarRepartidor(data=[]){
                 let me = this;
@@ -518,6 +508,23 @@ l             }).catch((value) => {
                 });
             },
 
+            agregarGlosa(){
+                 let me = this;
+                axios.post('/agregar/glosa', {
+                    'glosa': this.glosa,
+                    'id': this.idPedido
+                }).then(function(response) {
+                    me.cerrarModal();
+                    me.listarPedido(1, '', 'cliente');
+                     iziToast.info({
+                            title: 'Exito!',
+                            message: 'Se ha agregado la glosa',
+                    });
+                }).catch(function(error) {
+                    console.log(error);
+                });
+            },
+
             abrirModal(modelo, accion, data = []) {
                 switch (modelo) {
                     case "pedido":
@@ -537,6 +544,7 @@ l             }).catch((value) => {
                                         this.tituloModal = 'Escribir Glosa';
                                         this.tipoAccion = 1;
                                         this.idPedido = data["id"];
+                                        this.glosa= data['glosa'];
 
 
                                         break;
