@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\cliente;
 use App\detalleOrden;
 use App\detallePedido;
+use App\ordenAtencion;
 use App\pedido;
 use App\bitacora;
 use Barryvdh\DomPDF\Facade as PDF;
