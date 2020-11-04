@@ -74,6 +74,9 @@
                                     <button type="button" @click="abrirModal('pedido','ver',pedido)" class="btn btn-primary btn-sm">
                                                  <i class="icon-eye"></i>
                                     </button>
+                                    <button class="btn btn-sm btn-primary" @click="generarPDF(pedido.id)">
+                                    <i class="icon-doc"></i></button>
+
 
                                     
 
@@ -523,6 +526,9 @@ l             }).catch((value) => {
                 }).catch(function(error) {
                     console.log(error);
                 });
+            },
+            generarPDF(id){
+                window.open('http://localhost:8000/pdf/pedido/'+ id +','+'_blank');
             },
 
             abrirModal(modelo, accion, data = []) {

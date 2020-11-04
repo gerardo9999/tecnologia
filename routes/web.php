@@ -107,6 +107,7 @@ Route::get('pedidoRepartidor','ctrlPedido@mostrarPedidoRepartidor');
 
 
 Route::post('pedido/entregado','ctrlPedido@entregado');
+Route::post('pedido/eliminar','ctrlPedido@eliminarPedido');
 Route::get('/detalle/pedido/cliente','ctrlPedido@mostrarDetallePedidoCliente');
 Route::get('/detalle/pedido/admin','ctrlPedido@mostrarDetallePedidoAdmin');
 Route::get('/detalle/pedido/repartidor','ctrlPedido@mostrarDetallePedidoRepartidor');
@@ -130,10 +131,10 @@ Route::get('/detalle/orden','ctrlOrdenAtencion@mostrarDetalleOrden');
 
 
 Route::get('/pdf/orden/{id}','ctrlPDF@generarPDFOrden')->name('orden.pdf');
-
 Route::get('/pdf/pedido/{id}','ctrlPDF@generarPDFPedido')->name('pedido.pdf');
 
 
+///pedido/eliminar
 /////----------------Repartidor-----------------///
 Route::get('repartidor','ctrlRepartidor@index');
 Route::post('repartidor/guardar','ctrlRepartidor@store');

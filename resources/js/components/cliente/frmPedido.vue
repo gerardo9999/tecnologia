@@ -176,7 +176,7 @@
                 idPedido : 0,
                 fecha : null,
                 cliente : 0,
-                horaCondicion:'',
+                horaCondicion:true,
                 pagination: {
                     'total': 0,
                     'current_page': 0,
@@ -341,7 +341,6 @@
             pedidocancelado(id){
 
                 this.verificarHora(id);
-                alert(this.horaCondicion);
 
                 if(this.horaCondicion){
                     swal({
@@ -452,7 +451,48 @@
             },
 
             eliminarPedido(id){
-                alert("ejemplo")
+                swal({
+                    title: 'Esta seguro de eliminar este pedido?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar!',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                    buttonsStyling: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        let me = this;
+
+                        axios.post('/pedido/eliminar', {
+                            'id': id
+                        }).then(function(response) {
+                            me.listarPedido(1, '', 'cliente');
+                            swal(
+                                'Eliminado!',
+                                'El registro ha sido eliminado con éxito.',
+                                'success'
+                            )
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+
+
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                    ) {
+
+                    }
+                })
+
+
+
+
+
             }
         },
 

@@ -477,6 +477,13 @@ class ctrlPedido extends Controller
         ];
     }
 
+    public function eliminarPedido(Request $request){
+        $pedido = pedido::findOrFail($request->id);
+        $pedido->delete();
+
+        return ['pedido'=>$pedido];
+    }
+
 }
 
 

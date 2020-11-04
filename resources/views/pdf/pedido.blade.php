@@ -206,7 +206,7 @@
                             <th></th>
                             <th></th>
                             <th style:='padding:30px'>TOTAL</th>
-                            <th>{{$pedido->montoTotal}} .Bs</th>       
+                            <th>{{$pedido->montototal}} .Bs</th>       
                         </tr>
                     </tfoot>
                 </table>

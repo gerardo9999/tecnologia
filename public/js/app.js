@@ -5360,6 +5360,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5594,6 +5597,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    generarPDF: function generarPDF(id) {
+      window.open('http://localhost:8000/pdf/pedido/' + id + ',' + '_blank');
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -8809,7 +8815,7 @@ __webpack_require__.r(__webpack_exports__);
       idPedido: 0,
       fecha: null,
       cliente: 0,
-      horaCondicion: '',
+      horaCondicion: true,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -8949,7 +8955,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.verificarHora(id);
-      alert(this.horaCondicion);
 
       if (this.horaCondicion) {
         swal({
@@ -9039,7 +9044,34 @@ __webpack_require__.r(__webpack_exports__);
       this.detallePedido(this.idPedido);
     },
     eliminarPedido: function eliminarPedido(id) {
-      alert("ejemplo");
+      var _this6 = this;
+
+      swal({
+        title: 'Esta seguro de eliminar este pedido?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this6;
+          axios.post('/pedido/eliminar', {
+            'id': id
+          }).then(function (response) {
+            me.listarPedido(1, '', 'cliente');
+            swal('Eliminado!', 'El registro ha sido eliminado con éxito.', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if ( // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {}
+      });
     }
   },
   mounted: function mounted() {
@@ -52212,6 +52244,19 @@ var render = function() {
                                   }
                                 },
                                 [_c("i", { staticClass: "icon-eye" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-primary",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.generarPDF(pedido.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-doc" })]
                               )
                             ])
                           ]

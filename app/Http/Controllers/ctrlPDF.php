@@ -62,7 +62,6 @@ class ctrlPDF extends Controller
                  "pedido"         => $pedido
                 ];
           
-                
         $pdf = PDF::loadView('pdf.pedido',$data);
         
         return $pdf->download('pedido-atencion.pdf');
