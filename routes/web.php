@@ -177,6 +177,8 @@ Route::post('pedido/cancelado','ctrlPedido@estadoCancelado');
 Route::post('pedido/pendiente','ctrlPedido@estadoPendiente');
 Route::post('pedido/entregado/admin','ctrlPedido@estadoEntregado');
 
+Route::get('pedido/hora'           ,'ctrlPedido@validarHora');
+
 //------------------reserva admin----------------//
 Route::post('reserva/cancelada','ctrlReserva@reservacancelada');
 Route::post('reserva/pendiente','ctrlReserva@reservapendiente');

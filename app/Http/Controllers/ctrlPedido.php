@@ -395,10 +395,11 @@ class ctrlPedido extends Controller
 
 
     public function estadoCancelado(Request $request){
+       
         $pedido= pedido::findOrFail($request->id);
         $pedido->estado = 2;
-        $pedido->update();
-        $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
+            $pedido->update();
+            $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
     }
 
     public function mostrarDetallePedidoAdmin(Request $request){
@@ -454,6 +455,26 @@ class ctrlPedido extends Controller
         $pedido->update();
         
         $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
+    }
+
+    public function validarHora(Request $request){
+        $condicion=false;
+        
+        $pedido= pedido::findOrFail($request->idPedido);
+        $horaPedido=$pedido->hora;
+        $horaActual= date('H:i:s'); 
+        $horaLimite=$this->sumarHoras($horaActual,'00:05:00');
+
+        if($horaActual <= $horaLimite){
+            $condicion=true;
+        }
+        return[
+            'horaCondicion'=>$condicion,
+            'horaActual'=>$horaActual,
+            'horaPedido'=>$horaPedido,
+            'horaLimite'=>$horaLimite
+    
+        ];
     }
 
 }

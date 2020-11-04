@@ -8809,6 +8809,7 @@ __webpack_require__.r(__webpack_exports__);
       idPedido: 0,
       fecha: null,
       cliente: 0,
+      horaCondicion: '',
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -8947,31 +8948,56 @@ __webpack_require__.r(__webpack_exports__);
     pedidocancelado: function pedidocancelado(id) {
       var _this4 = this;
 
-      swal({
-        title: 'El Pedido va a ser Cancelado?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar!',
-        cancelButtonText: 'Cancelar',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false,
-        reverseButtons: true
-      }).then(function (result) {
-        if (result.value) {
-          var me = _this4;
-          axios.post('pedido/cancelado', {
-            'id': id
-          }).then(function (response) {
-            me.listarPedido(1, '', 'fecha');
-            swal('Pedido Cancelado!', 'Su pedido ha sido Cancelado con Exito.', 'success');
-          })["catch"](function (error) {
-            console.log(error);
-          });
-        } else if ( // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.cancel) {}
+      this.verificarHora(id);
+      alert(this.horaCondicion);
+
+      if (this.horaCondicion) {
+        swal({
+          title: 'El Pedido va a ser Cancelado?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar!',
+          cancelButtonText: 'Cancelar',
+          confirmButtonClass: 'btn btn-success',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false,
+          reverseButtons: true
+        }).then(function (result) {
+          if (result.value) {
+            var me = _this4;
+            axios.post('pedido/cancelado', {
+              'id': id
+            }).then(function (response) {
+              me.listarPedido(1, '', 'fecha');
+              swal('Pedido Cancelado!', 'Su pedido ha sido Cancelado con Exito.', 'success');
+            })["catch"](function (error) {
+              console.log(error);
+            });
+          } else if ( // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.cancel) {}
+        });
+      } else {
+        swal('Pedido no pudo ser Cancelado!', 'tiempo de cancelacion a concluido', 'success');
+      }
+    },
+    verificarHora: function verificarHora(id) {
+      var me = this;
+      var url = '/pedido/hora?idPedido=' + id;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.horaCondicion = respuesta.horaCondicion;
+        /*me.idMesa          = respuesta.idMesa;
+            me.idOrdenAtencion = respuesta.idOrdenAtencion;
+            me.nombreCompleto  = respuesta.nombreCompleto;
+            me.ArrayDetalleOrdenAtencion = respuesta.detalle;
+            
+        */
+
+        console.log(this.horaCondicion);
+      })["catch"](function (error) {
+        console.log(error);
       });
     },
     detallePedido: function detallePedido(id) {
