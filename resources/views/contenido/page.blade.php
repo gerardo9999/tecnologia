@@ -1,11 +1,9 @@
 @extends('welcome')
 @section('contenido')
-      <!--/ Nav Star /-->
   @include('page.navbar')
-  <!--/ Nav End /-->
-  <!--/ bienvenido Star /-->
-  @include('page.bienvenido')
-  <!--/ bienvenido end /-->
+
+  @include('page.intro')
+  
   @if(session()->has('create'))
     <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -30,7 +28,6 @@
       @include('page.nosotros')
     @endrole  
   @endguest
-
   @include('components.frmPedido')
-  
+
 @endsection

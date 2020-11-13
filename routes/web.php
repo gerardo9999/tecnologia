@@ -102,7 +102,7 @@ Route::post('/pedido/store','ctrlPedido@guardar')->name('pedido.store');
 /////----------------Pedido Cliente-----------------///
 Route::get('pedido/cliente','ctrlPedido@mostrarPedidoCliente');
 Route::get('pedido/admin','ctrlPedido@mostrarPedidoAdmin');
-Route::get('pedidoRepartidor','ctrlPedido@mostrarPedidoRepartidor');
+Route::get('pedido/repartidos','ctrlPedido@mostrarPedidoRepartidor');
 
 
 

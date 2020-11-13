@@ -304,7 +304,6 @@ class ctrlPedido extends Controller
         
         if($buscar==''){
 
-
              $pedido= pedido::join('cliente','cliente.id','=','pedido.idCliente')
              ->join('ubicacion','ubicacion.id','=','pedido.idUbicacion') 
              ->select('pedido.idCliente',
@@ -325,6 +324,7 @@ class ctrlPedido extends Controller
              'pedido.horaentrega',
              'pedido.tiempoentrega',
              'ubicacion.referencia',
+             'ubicacion.url',
              'pedido.montototal',
              'pedido.estado'
              )->where('pedido.idRepartidor','=',$repartidor)
@@ -336,7 +336,7 @@ class ctrlPedido extends Controller
          }
          else{
             $pedido= pedido::join('cliente','cliente.id','=','pedido.idCliente')
-            ->join('ubicacion','ubicacion.id','=','pedido.ubicacion')
+            ->join('ubicacion','ubicacion.id','=','pedido.idUbicacion')
             ->select('cliente.id as idCliente',
             'pedido.id',
             'cliente.nombres',
@@ -355,15 +355,15 @@ class ctrlPedido extends Controller
             'pedido.horaentrega',
             'pedido.tiempoentrega',
             'ubicacion.referencia',
+            'ubicacion.url',
             'pedido.montototal',
             'pedido.estado'
             )
              ->where('pedido.idRepartidor','=',$repartidor)
              ->where($criterio.'.nombres', 'like', '%'.$buscar.'%')
+             ->orWhere($criterio.'.apellidos', 'like', '%'.$buscar.'%')
              ->orderBy('cliente.id','desc')->paginate(10);            
          }
-
-
          
          return [
              'pagination' => [

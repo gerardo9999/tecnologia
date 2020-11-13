@@ -48,27 +48,44 @@
                                 <td v-text="pedido.horaentrega"></td>
                                 <td v-text="pedido.tiempoentrega"></td>
                                 <td v-text="pedido.referencia"></td>
-                                <td v-text="pedido.montototal"></td>
+                                <td>{{pedido.montototal}} Bs</td>
+
                                 <template v-if="pedido.estado==0">
                                     <td><span class="badge badge-warning">Pendiente</span></td>
-                                    <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                    &nbsp;
+                                    <td>
+                                     &nbsp;
+                                        <button @click="pedidoEntregado(pedido.id)" type="button" class="btn btn-info btn-sm">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                         &nbsp;
                                         <button type="button" @click="abrirModal('pedido','ver',pedido)" class="btn btn-primary btn-sm">
                                                  <i class="icon-eye"></i>
                                         </button>
-
+                                        &nbsp;
+                                        <button class="btn btn-sm btn-warning" @click="verUbicacion(pedido.url)">
+                                            <i class="icon-globe-alt"></i>
+                                        </button>
+                                    </td>
                                 </template>
+                         
                                 <template v-if="pedido.estado==1">
                                     <td><span class="badge badge-success">Entregado</span></td>
-                                        <td></td>
+                                    <td>
+                                        &nbsp;
+                                        <button type="button" @click="abrirModal('pedido','ver',pedido)" class="btn btn-primary btn-sm">
+                                                 <i class="icon-eye"></i>
+                                        </button>
+                                        &nbsp;
+                                        <button class="btn btn-sm btn-warning" @click="verUbicacion(pedido.url)">
+                                            <i class="icon-globe-alt"></i>
+                                        </button>    
+                                    </td>
                                 </template>
+
                                 <template v-if="pedido.estado==2">
                                     <td><span class="badge badge-danger">Cancelado</span></td>
                                     <td></td>
                                 </template>
-                                   
                             </tr>
                         </tbody>
                     </table>
@@ -108,9 +125,18 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="border text-left p-2">
-                                <h6 class="title"><b>Cliente:&nbsp;</b>{{cliente}}</h6>
-                                  <tr>
+
+                            <div class="border text-center p-2 m-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 style="font-size: 12px;" class="title"><b>Cliente:&nbsp;</b>{{cliente}}</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 style="font-size: 12px;"><b>Fecha Pedido:</b>  {{fecha}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                                    <!-- <tr>
                                         <td colspan="3" align="left"><strong>Fecha :</strong></td>
                                         <td>
                                             {{ fecha}} 
@@ -134,7 +160,7 @@
                                             {{referencia}} 
                                         </td>
                                     </tr>                                    
-                            </div>
+                            </div> -->
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
@@ -161,6 +187,27 @@
                                 </tbody>
                                 
                             </table>
+
+                            <div class="border m-2 p-2 text-center">
+                                <i style="font-size: 15px;"><h6><b>Referencia :</b>  {{referencia}}</h6></i>
+
+
+
+                            <div class="border p-2 text center m-2;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <i><h6 style="font-size: 10px; "><b>Logitud :</b>  {{longitud}}</h6></i>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i><h6 style="font-size: 10px;"><b>Latitud :</b>  {{latitud}}</h6></i>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                                
+                            </div>
+                  
+                            
 
                         </div>
                         <div class="modal-footer">
@@ -243,7 +290,7 @@
             listarPedido(page,buscar,criterio){
                 let me = this;
 
-                var url ='/pedidoRepartidor?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+                var url ='/pedido/repartidos?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
 
                 axios.get(url).then((response) => {
                     var respuesta    = response.data;
@@ -267,9 +314,10 @@
                 document.getElementsByTagName("html")[0].style.overflow = "auto";
 
             },
-           
-
-               pedidoPediente(id){
+            verUbicacion(url){
+                window.open(url);
+            },
+            pedidoPediente(id){
                 swal({
                 title: 'El Pedido está Pendiente?',
                 type: 'warning',
@@ -308,8 +356,6 @@
                 }
                 })
             },
-            
-
             pedidoEntregado(id){
                 swal({
                 title: 'El Pedido ha sido Entregado?',
@@ -349,7 +395,6 @@
                 }
                 })
             },
-
             pedidocancelado(id){
                 swal({
                 title: 'El Pedido va a ser Cancelado?',
@@ -433,6 +478,7 @@
                 });
             }
         },
+        
         mounted() {
             this.listarPedido(1,this.buscar,this.criterio);
         },

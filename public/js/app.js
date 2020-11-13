@@ -9737,6 +9737,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9804,7 +9851,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var me = this;
-      var url = '/pedidoRepartidor?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+      var url = '/pedido/repartidos?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.ArrayPedido = respuesta.pedido.data;
@@ -9823,6 +9870,9 @@ __webpack_require__.r(__webpack_exports__);
       this.modal = 0;
       this.tituloModal = '';
       document.getElementsByTagName("html")[0].style.overflow = "auto";
+    },
+    verUbicacion: function verUbicacion(url) {
+      window.open(url);
     },
     pedidoPediente: function pedidoPediente(id) {
       var _this2 = this;
@@ -59047,52 +59097,110 @@ var render = function() {
                         domProps: { textContent: _vm._s(pedido.referencia) }
                       }),
                       _vm._v(" "),
-                      _c("td", {
-                        domProps: { textContent: _vm._s(pedido.montototal) }
-                      }),
+                      _c("td", [_vm._v(_vm._s(pedido.montototal) + " Bs")]),
                       _vm._v(" "),
                       pedido.estado == 0
                         ? [
                             _vm._m(3, true),
                             _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-info btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.pedidoEntregado(pedido.id)
+                            _c("td", [
+                              _vm._v(
+                                "\n                                  \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.pedidoEntregado(pedido.id)
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-check" })]
-                            ),
-                            _vm._v(
-                              "\n                                 \n                                    "
-                            ),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.abrirModal(
-                                      "pedido",
-                                      "ver",
-                                      pedido
-                                    )
+                                },
+                                [_c("i", { staticClass: "fa fa-check" })]
+                              ),
+                              _vm._v(
+                                "\n                                      \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "ver",
+                                        pedido
+                                      )
+                                    }
                                   }
-                                }
-                              },
-                              [_c("i", { staticClass: "icon-eye" })]
-                            )
+                                },
+                                [_c("i", { staticClass: "icon-eye" })]
+                              ),
+                              _vm._v(
+                                "\n                                     \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-warning",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.verUbicacion(pedido.url)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-globe-alt" })]
+                              )
+                            ])
                           ]
                         : _vm._e(),
                       _vm._v(" "),
                       pedido.estado == 1
-                        ? [_vm._m(4, true), _vm._v(" "), _c("td")]
+                        ? [
+                            _vm._m(4, true),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                                     \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.abrirModal(
+                                        "pedido",
+                                        "ver",
+                                        pedido
+                                      )
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-eye" })]
+                              ),
+                              _vm._v(
+                                "\n                                     \n                                    "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-warning",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.verUbicacion(pedido.url)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-globe-alt" })]
+                              )
+                            ])
+                          ]
                         : _vm._e(),
                       _vm._v(" "),
                       pedido.estado == 2
@@ -59245,57 +59353,27 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "border text-left p-2" }, [
-                  _c("h6", { staticClass: "title" }, [
-                    _c("b", [_vm._v("Cliente: ")]),
-                    _vm._v(_vm._s(_vm.cliente))
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                                        " +
-                          _vm._s(_vm.fecha) +
-                          " \n                                    "
+                _c("div", { staticClass: "border text-center p-2 m-2" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "h6",
+                        {
+                          staticClass: "title",
+                          staticStyle: { "font-size": "12px" }
+                        },
+                        [
+                          _c("b", [_vm._v("Cliente: ")]),
+                          _vm._v(_vm._s(_vm.cliente))
+                        ]
                       )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _vm._m(7),
+                    ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                                        " +
-                          _vm._s(_vm.latitud) +
-                          " \n                                    "
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _vm._m(8),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                                        " +
-                          _vm._s(_vm.longitud) +
-                          " \n                                    "
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _vm._m(9),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                                        " +
-                          _vm._s(_vm.referencia) +
-                          " \n                                    "
-                      )
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("h6", { staticStyle: { "font-size": "12px" } }, [
+                        _c("b", [_vm._v("Fecha Pedido:")]),
+                        _vm._v("  " + _vm._s(_vm.fecha))
+                      ])
                     ])
                   ])
                 ]),
@@ -59306,7 +59384,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(10),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -59327,7 +59405,7 @@ var render = function() {
                           "tr",
                           { staticStyle: { "background-color": "#CEECF5" } },
                           [
-                            _vm._m(11),
+                            _vm._m(7),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
@@ -59342,7 +59420,38 @@ var render = function() {
                       2
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "border m-2 p-2 text-center" }, [
+                  _c("i", { staticStyle: { "font-size": "15px" } }, [
+                    _c("h6", [
+                      _c("b", [_vm._v("Referencia :")]),
+                      _vm._v("  " + _vm._s(_vm.referencia))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "border p-2 text center m-2;" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("i", [
+                          _c("h6", { staticStyle: { "font-size": "10px" } }, [
+                            _c("b", [_vm._v("Logitud :")]),
+                            _vm._v("  " + _vm._s(_vm.longitud))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("i", [
+                          _c("h6", { staticStyle: { "font-size": "10px" } }, [
+                            _c("b", [_vm._v("Latitud :")]),
+                            _vm._v("  " + _vm._s(_vm.latitud))
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -59437,38 +59546,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("span", { staticClass: "badge badge-danger" }, [_vm._v("Cancelado")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
-      _c("strong", [_vm._v("Fecha :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
-      _c("strong", [_vm._v("Latitud :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
-      _c("strong", [_vm._v("Longitud : ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "3", align: "left" } }, [
-      _c("strong", [_vm._v("Referencia : ")])
     ])
   },
   function() {
@@ -75957,7 +76034,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Restaurante\tecnologia\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\gerar\OneDrive\Escritorio\Proyecto\Mesa\tecnologia\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

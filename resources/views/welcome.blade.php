@@ -10,19 +10,17 @@
 
       @auth
         @role('cliente')
-          
+              
           <div id="title-reservacion" style="display: none"; >
             <div class="title-box-d">
               <h3 class="title-d">Realice su Reservacion</h3>
             </div>
           </div>
-          
           <div id="title-pedido" style="display: none"; >
             <div class="title-box-d">
               <h3 class="title-d">Mi Pedido</h3>
             </div>
           </div>
-        
         @endrole
         
         @role('administrador')
@@ -179,8 +177,9 @@
             {{-- <div class="border">
             </div> --}}
               @guest
-            <button id="boton-datos" onclick="mostrarDatos()" style="display: none" type="button" class="btn btn-sm btn-success btn-block" >
-              Envianos tus Datos Personales</button>
+              <button id="boton-datos" onclick="mostrarDatos()" style="display: none" type="button" class="btn btn-sm btn-success btn-block" >
+                Envianos tus Datos Personales
+              </button>
               @endguest
 
             <button type="button" class="btn btn-sm btn-success btn-block" data-target="#maps" data-toggle="modal">Envianos tu Ubicacion</button>
@@ -216,7 +215,7 @@
                   font-family: "Frank";
               }
   
-          </style>
+            </style>
       
             {{-- @include('page.gps-css') --}}
 
@@ -495,11 +494,82 @@
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
   <div id="preloader"></div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="nav-footer">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="#">Home</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">About</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Property</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Blog</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Contact</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="socials-a">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-dribbble" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="copyright-footer">
+            <p class="copyright color-text-a">
+              &copy; Copyright
+              <span class="color-a">EstateAgency</span> All Rights Reserved.
+            </p>
+          </div>
+          <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
+            -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
   @include('page.scripts')
   <script>    
     this.arrayProducto = [];
-
     function agregar(idProducto) {
       console.log(idProducto);
     }
@@ -631,7 +701,6 @@
     function mostrarDatos(){
       alert("Correcto");
     }
-
   </script>
 </body>
 </html>

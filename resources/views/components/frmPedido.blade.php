@@ -23,8 +23,8 @@
 
                                 <div class="col-md-12">
                                     <div class="card-box-a card-shadow">
-                                        <div class="img-box-a">
-                                            <img src="{{ asset($lista->foto) }}" alt="" class="img-a img-fluid">
+                                        <div class="img-box-a" >
+                                            <img src="{{ asset($lista->foto) }}" alt="" style="max-width: 200px ; min-width: 200px; max-height: 50vh ;" width="100%" class="img-a img-fluid">
                                         </div>
                                         <div class="card-overlay">
                                             <div class="card-overlay-a-content">
@@ -59,13 +59,13 @@
                                 </div>
 
                                 <div wire:ignore.self id="ejemplo{{ $lista->idProducto }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-dialog modal-md" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header alert-default-info">
                                                 <h5 class="modal-title" id="my-modal-title">
-                                                    <div class="img-avatar align-items-center text-center">
-                                                        <img height="200px" width="100%"  class="img-fluid" src="{{ $lista->foto }}" alt="">
-                                                    </div>
+                                                    <p>
+                                                        <strong>{{ $lista->nombre }}</strong>
+                                                    </p>
                                                     
                                                 </h5>
 
@@ -73,19 +73,11 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="card-header text-center">
-                                                <p>
-                                                    <strong>{{ $lista->nombre }}</strong>
-                                                </p>
-                                            </div>
                                             <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="">Cuantos Desea Ordenar?</label>
-                                                    <input id='cantidad{{$lista->idProducto}}' type="number" class="form-control" >
-                                                    @error('cantidad')
-                                                        {{ $message }}
-                                                    @enderror
+                                                <div style="height:20px ; background-color:aqua;" >
+                                                    <img style="object-fit: none" src="{{ $lista->foto }}" alt="">
                                                 </div>
+
                                             </div>
                                             <div class="modal-footer text-center">
                                                 <button onclick='agregarAlDetalle({{ $lista }})' 
@@ -107,9 +99,8 @@
 
                         <div class="row">
                             @foreach (@listaMenu() as $lista)
-                                <div class="col-md-6">
-
-                                        <div class="col-md-12">
+                                <div class="col-md-6 " style="max-height: 200px ; min-height: 200px; backgroup-color:aqua;">
+                                        <div class="col-md-12" style="background-color: aqua">
                                             <div class="card-box-a card-shadow">
                                                 <div class="img-box-a">
                                                     <img src="{{ asset($lista->foto) }}" alt="" class="img-a img-fluid">
@@ -146,13 +137,14 @@
                                             </div>
                                         </div>
 
+                                        {{-- Modal --}}
                                         <div wire:ignore.self id="ejemplo{{ $lista->idProducto }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-dialog modal-md" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header alert-default-info">
                                                         <h5 class="modal-title" id="my-modal-title">
                                                             <div class="img-avatar align-items-center text-center">
-                                                                <img height="200px" width="100%"  class="img-fluid" src="{{ $lista->foto }}" alt="">
+                                                                <img  width="100%"  class="img-fluid" src="{{ $lista->foto }}" alt="">
                                                             </div>
                                                             
                                                         </h5>
@@ -183,13 +175,11 @@
                                             </div>
                                         </div> 
                                 </div>
-                    
                             @endforeach
                         </div>
                     </div>
             </section>
         @endrole
-        
     @endguest
     
        
