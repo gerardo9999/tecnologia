@@ -12,6 +12,7 @@ class Pedido extends Component
     public $searchText;
     public $idProducto;
 
+    public $ejemplo = "Ejemplo";
     public $total = 0;
 
     public $cantidad;

@@ -18,16 +18,15 @@
             </div>
         </div>
     </div>
+  
   @endif
 
   @guest
     @include('page.nosotros')
-
   @else
     @role('cliente')
       @include('page.nosotros')
     @endrole  
   @endguest
-  @include('components.frmPedido')
-
+  @include('components.frmMenu')
 @endsection
