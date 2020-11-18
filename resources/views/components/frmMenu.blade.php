@@ -1,6 +1,3 @@
-
-{{-- @livewire('delivery') --}}
-
 @guest
     <livewire:delivery>
 @else

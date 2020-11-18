@@ -15,5 +15,6 @@
 
   <!-- Template Main Javascript File -->
   <script src="{{asset('page/restaurante/js/main.js')}}"></script>
+  <script src="{{asset('page/iziToast/izi.js')}}"></script>
   {{-- <script src="resources/plantilla/js/iziToast.js"></script> --}}
   @yield('map')

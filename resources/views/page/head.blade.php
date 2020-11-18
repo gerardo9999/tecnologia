@@ -23,5 +23,6 @@
   
     <!-- Main Stylesheet File -->
     <link href="{{asset('page/restaurante/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('page/iziToast/izi.css')}}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="/resources/plantilla/css/iziToast.css"> --}}
   </head>
