@@ -176,6 +176,7 @@
                 idPedido : 0,
                 fecha : null,
                 cliente : 0,
+                condicion : '',
                 horaCondicion:true,
                 pagination: {
                     'total': 0,
@@ -359,15 +360,34 @@
                     if (result.value) {
                         let me = this;
 
+
+
                         axios.post('pedido/cancelado',{
                             'id': id
                         }).then(function (response) {
+                            console.log(response);
+                            var respuesta = response.data;
+                            me.condicion = respuesta.estado;
+
+                            console.log(respuesta);
+                            console.log(me.condicion);
+
                             me.listarPedido(1, '', 'fecha');
-                            swal(
-                            'Pedido Cancelado!',
-                            'Su pedido ha sido Cancelado con Exito.',
-                            'success'
-                            )
+
+                            if(me.condicion=='cancelado'){
+                                swal(
+                                'Pedido Cancelado!',
+                                'Su pedido ha sido Cancelado con Exito.',
+                                'success'
+                                )
+                            }else{
+                                swal(
+                                'Pedido no cancelado!',
+                                'Su pedido no ha sido Cancelado.',
+                                'success'
+                                )
+                            }
+
                         }).catch(function (error) {
                             console.log(error);
                         });

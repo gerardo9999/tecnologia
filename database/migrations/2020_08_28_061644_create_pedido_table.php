@@ -9,6 +9,7 @@ class CreatePedidoTable extends Migration
     public function up()
     {
         Schema::create('pedido', function (Blueprint $table) {
+     
             
             $table->increments('id');
             $table->date('fecha');

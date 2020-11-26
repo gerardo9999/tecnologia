@@ -18,7 +18,7 @@
           </div>
           <div id="title-pedido" style="display: none"; >
             <div class="title-box-d">
-              <h3 class="title-d">Mi Pedido</h3>
+              <h3 class="title-d">Mi Pedido </h3>
             </div>
           </div>
         @endrole
@@ -48,7 +48,7 @@
         
         <div id="title-pedido" style="display: none"; >
           <div class="title-box-d">
-            <h3 class="title-d">Mi Pedido</h3>
+            <h3 class="title-d">Mi Pedido</h3> <b></b>
           </div>
         </div>
       @endauth
@@ -58,13 +58,13 @@
       <span class="close-box-collapse right-boxed ion-ios-close"></span>
 
       <div class="box-collapse-wrap form">
-        
 
         <div id="reservacion" style="display: none;" >
           <livewire:reservacion>
         </div>
-
-        @include('modules.pedido')
+        <div id="pedido" style="display: none;">
+          @include('modules.pedido')
+        </div>
       </div>
       
   @yield('contenido')
@@ -78,6 +78,6 @@
   {{-- @include('page.footer') --}}
 
   @include('page.scripts')
-  @yield('detalle')
+
 </body>
 </html>

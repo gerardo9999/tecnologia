@@ -91,8 +91,6 @@ class ctrlReserva extends Controller
         $bitacora = bitacora::guardar('reserva','guardar',$reserva->id);
     }
 
-
-
     public function modificar(Request $request){
         // if (!$request->ajax()) return redirect('/');
 
@@ -108,10 +106,6 @@ class ctrlReserva extends Controller
         $bitacora = bitacora::guardar('reserva','actualizar',$reserva->id);
     }
 
-
-
-
-
     public function eliminar(Request $request){
         // if (!$request->ajax()) return redirect('/');
         $reserva = reserva::findOrFail($request->id);
@@ -121,8 +115,6 @@ class ctrlReserva extends Controller
 
         return ['reserva' => $reserva];
     }
-
-
     
     public function mostrarReservaCliente(Request $request){
         

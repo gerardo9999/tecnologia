@@ -100,7 +100,7 @@ Route::post('/finalizar/orden','ctrlOrdenAtencion@finalizarOrden');
 Route::post('/pedido/store','ctrlPedido@guardar')->name('pedido.store');
 
 /////----------------Pedido Cliente-----------------///
-Route::get('pedido/cliente','ctrlPedido@mostrarPedidoCliente');
+Route::get('pedido/cliente','ctrlPedido@mostrarPedidoCliente'); 
 Route::get('pedido/admin','ctrlPedido@mostrarPedidoAdmin');
 Route::get('pedido/repartidos','ctrlPedido@mostrarPedidoRepartidor');
 

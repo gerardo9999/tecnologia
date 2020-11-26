@@ -18,3 +18,8 @@
   <script src="{{asset('page/iziToast/izi.js')}}"></script>
   {{-- <script src="resources/plantilla/js/iziToast.js"></script> --}}
   @yield('map')
+  @yield('dato')
+  @yield('detalle')
+  @yield('verReservacion')
+  @yield('verPedido')
+  @yield('fechaEntrega')

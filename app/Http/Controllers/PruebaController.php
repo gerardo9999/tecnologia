@@ -23,6 +23,25 @@ class PruebaController extends Controller
 {
     public function prueba(Request $request){
 
+        $fechaActual = date('Y-m-d');
+        $listaMenu =
+        listaMenu::join('menu','menu.id','=','listamenu.idMenu')
+        ->join('producto','producto.id','listamenu.idProducto')
+        ->join('categoria','menu.idCategoria','=','categoria.id')
+        ->select('producto.id as idProducto',
+                'producto.foto',
+                'producto.nombre',
+                'producto.precio',
+                'menu.fecha',
+                'categoria.nombre as categoria',
+                'menu.idCategoria')
+        ->where('menu.fecha','=',$fechaActual)
+        // ->orWhere('producto.nombre','LIKE','%'.$searchText.'%')
+        ->where('menu.estado','=',1)->paginate(4);
+
+
+        return $listaMenu;
+
         $id = 1;
         $detalle = detalleOrden::join('ordenatencion','ordenatencion.id','=','detalleorden.idOrdenAtencion')
         ->join('producto','producto.id','detalleorden.idProducto')->where('ordenatencion.id','=',$id)->get();

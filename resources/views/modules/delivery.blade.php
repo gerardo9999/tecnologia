@@ -12,10 +12,10 @@
           <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="#">Home</a>
+                {{-- <a href="#">Home</a> --}}
               </li>
               <li class="breadcrumb-item active" aria-current="page">
-                Properties Grid
+                {{-- Properties Grid --}}
               </li>
             </ol>
           </nav>
@@ -31,7 +31,7 @@
           <div class="col-sm-12">
             <div class="grid-option">
               <form>
-                <input type="text" wire:model='searchText'>
+                <input class="form-control form-control-sm" type="text" wire:model='searchText'>
               </form>
             </div>
           </div>
@@ -86,7 +86,8 @@
                           </p>
                       </div>
                       <div class="modal-body">
-                          <div class="form-group">
+                    
+                        <div class="form-group">
                               <label for="">Cuantos Desea Ordenar?</label>
                               <input id='cantidad{{$menu->idProducto}}' type="number" class="form-control" >
                               @error('cantidad')
@@ -127,150 +128,169 @@
     </section>  
   @else
     <div class="border">
-      <h5 class="title">Perdona las molestias aun no hemos realizado el menu del dia de hoy</h5>
+      <h5 class="title"></h5>
     </div>  
   @endif
 </div>
 @section('detalle')
-<script>    
-  
-  this.arrayProducto = [];
-  function agregar(idProducto) {
-    console.log(idProducto);
-  }
-  var cont      = 0;
-      total     = 0;
-      subtotal  = [];
+<script>
+  arrayProducto = [];
+  arrayId       = [];
+  arrayCantidad = [];
+  arrayPrecio   = [];
 
-  function validar(producto){
-    var sw = false;
+  total    = 0;
+  subTotal = [];
+  count    = 0;
 
-    for (let index = 0; index < arrayProducto.length; index++) {
-        const element = arrayProducto[index];
-        console.log(element);
-        if(element == producto.idProducto){
-         sw = true;
-        }
-      }
-      return sw;
-  }
+  function agregarAlDetalle(producto){
+    var cantidad = document.getElementById('cantidad'+producto.idProducto).value;
+    var idCantidad = 'cantidad'+producto.idProducto;
 
-  function  agregarAlDetalle(producto) {
+    if(validarCantidad(cantidad)){
+      iziToast.error({
+        tittle: 'Error',
+        message : 'La cantidad no esta permitida'
+      })
+    }else{
 
-
-      if(validar(producto)){
-       alert("El producto ya fue añadido");
+      if (validarProducto(producto.idProducto)) {
+          iziToast.error({
+            tittle: 'Error',
+            message : 'el producto ya fue añadido'
+          });
+          borrarCantidad(producto);
       }else{
+        
         arrayProducto.push(producto.idProducto);
 
+        subTotal[count] = (cantidad * producto.precio);
+        total = total + subTotal[count];
+        
+        
+        var pedido = `
+            <tr class="select" id="fila${count}">
+              <td><button type="button" class="btn btn-danger" onclick="eliminarPedido(${count},${producto.idProducto});"><i class="fa fa-trash"></i></button></td>
+              <td>${producto.nombre}</td>
+              <td><input readonly type="number" id="${count}" name="cantidad[]" value="${cantidad}"  class="form-control"></td>
+              <td><input type="number" readonly name="precio[]" value="${producto.precio}"  class="form-control"></td>
+              <td>${subTotal[count]}</td>
+              
+            </tr>
+            <input type="hidden" name="idproducto[]" value="${producto.idProducto}">
+ 
+
+ 
+        `;
+
+        var montoTotal = `<input type="hidden" name="montoTotal" value="${total}">`;
+        
+          
+          $("#montoTotal").html("Bs/. " + total);
+          $("#total").append(montoTotal);
+  
+
+        cantidad = parseInt(cantidad);
+        arrayId.push(producto.idProducto);
+        arrayPrecio.push(producto.precio);
+        arrayCantidad.push(cantidad);
+
+          console.log(total);
+        
+
+        count++ ;
+        // console.log(count);
+        evaluar(count)
+        $("#detalles").append(pedido);
+        
+
+        
+
         iziToast.success({
-                            title: 'Exito!',
-                            message: arrayProducto,
-                    });
-        
-
-        console.log(producto);
-
-        var productoCantidad = document.getElementById('cantidad'+producto.idProducto).value;
-        subtotal[cont] = (productoCantidad * producto.precio);
-                total = total + subtotal[cont];
+          title: "Agregado correctamente"
+        })
 
 
-        console.log(producto);
-        console.log(subtotal);
-        console.log(total);
-        console.log(productoCantidad);
-        var fila = `<tr class="selected" id="fila${cont}">
-                                <td><button type="button" class="btn btn-danger" onclick="eliminar(${cont});"><i class="fa fa-trush"></i></button></td>
-                                <td>${producto.nombre}</td>
 
-                                <td><input readonly type="number" id="${cont}" name="cantidad[]" value="${productoCantidad}"  class="form-control"></td>
-                                <td><input type="number" readonly name="precio[]" value="${producto.precio}"  class="form-control"></td>
-                                <td>${subtotal[cont]}</td>
-                            </tr>
-                            <input type="hidden" name="idproducto[]" value="${producto.idProducto}">
-                    `;
-                    // readonly
-        cont++;
-        evaluar(cont)
-        
-          var montoTotal = `<input type="hidden" name="montoTotal" value="${total}">`;
 
-        $("#detalles").append(fila);
-        
-        $("#total").html("Bs/. " + total);
-
-        $("#montoTotal").append(montoTotal)
-
+        borrarCantidad(producto);
 
       }
-  }   
+ 
+    }
 
-  function evaluar(cont){
-      if(cont > 0){
+
+
+
+
+    
+  }
+
+  // Muestra el mensaje al insertar los datos
+  function mostrarMensaje(message){
+    $("#message").append("<p>"+message+"</p>");
+  }
+
+  // Muestra el boton de pedido en el navbar
+  function evaluar(count){
+      if (count > 0) {
         document.getElementById('btnPedido').style.display         = 'block';
       }else{
         document.getElementById('btnPedido').style.display         = 'none';
       }
   }
-
-  function fechaPedido(val){
-    console.log(val);
-    var fechaActual =  new Date();
-
-
-    var hoy = new Date();
-    var dd = hoy.getDate();
-    var mm = hoy.getMonth()+1;
-    var yyyy = hoy.getFullYear();
-
-    if(dd<10) {
-      dd='0'+dd;
-    } 
-
-    if(mm<10) {
-        mm='0'+mm;
-    } 
-
-    fechaP = yyyy + '-'+ mm +'-'+ dd;
-    if (val==fechaP) {
-      var horaEntregaPedido = document.getElementById('inputHora').style.display = "none";
-    }else{
-      var horaEntregaPedido = document.getElementById('inputHora').style.display = "block";
+  
+  // Valida la cantidad de producto
+  function validarCantidad(cantidad){
+    var sw = false;
+    if(cantidad <= 0){
+      sw = true;
     }
+    return sw;
   }
-  function setearHora(val){
-     
-  }
-
-  function eliminar(index){
-
-
-    total = total - subtotal[index];
-          $("#total").html("Bs/. " + total);
-          $("#fila" + index).remove();
-          evaluar();
-          arrayProducto.splice(index); 
+  
+  // borra la cantidad insertada de producto
+  function borrarCantidad(producto){
+    var cantidad = document.getElementById('cantidad'+producto.idProducto).value = null;    
   }
 
-  function reservacion(){
-    document.getElementById('reservacion').style.display        = 'block' ;
-    document.getElementById('title-reservacion').style.display  = 'block' ;
-    document.getElementById('title-pedido').style.display       = 'none'  ;
-    document.getElementById('pedido').style.display             = 'none'  ;
+  // Elimina los productos del array de validacion 
+  function eliminarProducto(idProducto){
+    arrayAuxiliar = [];
+    arrayAuxiliar = arrayProducto;
+    arrayProducto = [];
+
+    arrayAuxiliar.forEach(element => {
+      if(idProducto != element){
+        arrayProducto.push(element)}
+    });
   }
 
-  function  verPedido() {
-    document.getElementById('reservacion').style.display        = 'none'  ;
-    document.getElementById('title-reservacion').style.display  = 'none'  ;
-    document.getElementById('title-pedido').style.display       = 'block'  ;
-    document.getElementById('pedido').style.display             = 'block' ;
+  function validarProducto(idProducto){
+    var sw = false;
+    arrayProducto.forEach(element => {
+      if (idProducto == element) {
+        sw = true;
+      }
+    });
 
+    return sw;
+  }
+
+  function  eliminarPedido(count,pedido) {
+    // console.log(count);
+    // console.log(pedido);
+    eliminarProducto(pedido);
+    total = total - subTotal[count];
+            $("#total").html("Bs/. " + total);
+            $("#fila" + count).remove();
+            evaluar();
+            arrayProducto.splice(count); 
+    
+
+    
 
   }
 
-  function mostrarDatos(){
-    alert("Correcto");
-  }
 </script>
 @endsection

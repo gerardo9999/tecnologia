@@ -44,12 +44,6 @@ class ctrlPrecios extends Controller
         return view('modules.precio.frmCreate',['productos'=>$productos]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $precio = new precios();
@@ -63,23 +57,9 @@ class ctrlPrecios extends Controller
         return redirect('/precios')->with('success','el registro se ha guardado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+ 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit($id)
     {
         $precio=precios::join('producto','producto.id', '=', 'precio.idProducto')
@@ -90,13 +70,6 @@ class ctrlPrecios extends Controller
         return view('modules.precios.frmUpdate',['precios'=>$precio, 'producto'=>$productos]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $precio = precios::findOrFail($id);
@@ -109,16 +82,10 @@ class ctrlPrecios extends Controller
         return redirect('/precios')->with('info','el registro se ha guardado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $precios = precios::findOrFail($id);
-        $precio->delete();
+        $precios->delete();
 
         return redirect('/precios')->with('danger','el registro se ha guardado correctamente');
     }

@@ -154,3 +154,14 @@
 
     </div>
 </nav>
+@section('verPedido')
+  <script>
+    function verPedido(){
+      document.getElementById('reservacion').style.display        = 'none'  ;
+      document.getElementById('title-reservacion').style.display  = 'none'  ;
+      document.getElementById('title-pedido').style.display       = 'block'  ;
+      document.getElementById('pedido').style.display             = 'block' ;
+  
+    }
+  </script>
+@endsection

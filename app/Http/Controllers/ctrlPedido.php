@@ -17,11 +17,13 @@ use Illuminate\Support\Facades\DB;
 class ctrlPedido extends Controller
 {      
     public function guardar(Request $request){
+
+
         $hora1= date('H:i:s'); 
-       //return $request ;
         
 
         if (empty($request->hora_entrega)) {
+            
             $hora = $this->sumarHoras($hora1,$request->tiempo);
             // return [
             //     "horaActual"=>$hora1, "horaCalculada"=>$hora, $request->tiempo
@@ -32,6 +34,7 @@ class ctrlPedido extends Controller
             //     "horaActual"=>$hora1  , "hora"=>$hora, $request->tiempo
             // ];
         }
+
 
         if($request->guardar =='auth'){
             
@@ -80,9 +83,10 @@ class ctrlPedido extends Controller
         }else{
 
             $usuario            = new User();
-            $usuario->name      = $request->name;
+            $usuario->name      = $request->login;
+            $usuario->username      = $request->login;
             $usuario->email     = $request->email;
-            $usuario->password  = Hash::make($request->contraseña);
+            $usuario->password  = Hash::make($request->password);
             $usuario->nombre    = $request->nombre;
             $usuario->apellidos = $request->apellidos;
             $usuario->save();
@@ -97,10 +101,10 @@ class ctrlPedido extends Controller
             $cliente->empresa   = $request->empresa;
             $cliente->telefono  = $request->telefono;
             $cliente->direccion = $request->direccion;
-            $cliente->login     = $request->name;
+            $cliente->login     = $request->login;
             $cliente->email     = $request->email;
             $cliente->estado    = 0;
-            $cliente->password  = Hash::make($request->constraseña);
+            $cliente->password  = Hash::make($request->password);
             $cliente->save();            
 
 
@@ -115,7 +119,13 @@ class ctrlPedido extends Controller
             $pedido = new pedido();
             $pedido->fecha = date('Y-m-d');
             $pedido->fechaentrega = $request->fecha_entrega;
+            $pedido->hora = $hora1;
             $pedido->horaentrega = $hora;
+
+            if($request->fecha == $request->fecha_entrega){
+                $pedido->tiempoentrega = $request->tiempo;
+            }
+            
             $pedido->montototal = $request->montoTotal;
             $pedido->estado = 0;    //pendiente
             $pedido->idUsuario = $cliente->id;
@@ -393,13 +403,32 @@ class ctrlPedido extends Controller
         $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
     }
 
-
     public function estadoCancelado(Request $request){
        
+        $estado = "";
         $pedido= pedido::findOrFail($request->id);
-        $pedido->estado = 2;
+
+        $horaPedido = $pedido->hora;
+        $horaLimite = $this->sumarHoras($horaPedido,'00:05:00');
+
+        $horaActual = date('H:i:s');
+
+        if($horaActual <= $horaLimite){
+            
+            $pedido->estado = 2;
             $pedido->update();
             $bitacora=bitacora::guardar('pedido','actualizar',$pedido->id);
+            $estado = "cancelado";
+        }else{
+            $estado = "expirado";
+        }
+
+        
+        
+        return ["estado" => $estado,
+                "horaActual" =>$horaActual,
+                "horaLimite" => $horaLimite
+                ];
     }
 
     public function mostrarDetallePedidoAdmin(Request $request){
@@ -420,6 +449,7 @@ class ctrlPedido extends Controller
     }
 
     public function mostrarDetallePedidoCliente(Request $request){
+        
         $id = $request->idPedido;
 
 

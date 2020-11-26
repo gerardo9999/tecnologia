@@ -128,3 +128,13 @@
       </div>
     </div> 
 </section>
+@section('verReservacion')
+  <script>
+    function reservacion(){
+      document.getElementById('reservacion').style.display        = 'block' ;
+      document.getElementById('title-reservacion').style.display  = 'block' ;
+      document.getElementById('title-pedido').style.display       = 'none'  ;
+      document.getElementById('pedido').style.display             = 'none'  ;
+    }
+  </script>  
+@endsection

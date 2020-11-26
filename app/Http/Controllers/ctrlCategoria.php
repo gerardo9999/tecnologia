@@ -92,4 +92,4 @@ class ctrlCategoria extends Controller{
 
     }
 
-    }
+}
